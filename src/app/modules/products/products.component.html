@@ -1,0 +1,53 @@
+<app-navegacion></app-navegacion>
+<section *ngIf="cargado">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-6 my-4 font-weight-bold">PRODUCTOS</h1>
+            <div class="col-6 my-4 ">
+                <div class="row">
+                    <div class="col-8 mb-4">
+                        <div id="search-component">
+                            <input #searchBox id="search-box" type="search" class="form-control"
+                                placeholder="Buscar productos" />
+                        </div>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <button class="btn btn-danger btn-block" type="search" (click)="search(searchBox.value)">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <a routerLink="producto/detalle" class="btn btn-success">
+            Añadir un producto nuevo
+        </a>
+
+        <app-paginador [numeroElementos]="numeroProductos" (pagina)="cargarPagina($event)"></app-paginador>
+        <ul class="list-unstyled row">
+            <li *ngFor="let producto of productos" class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="img-container" style=" justify-content: center;">
+                        <img src="{{ producto.thumbnail }}" alt="foto" class="card-img-top" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ producto.title }}</h5>
+                        <p class="card-text">{{ producto.description }}</p>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ producto.brand }}</h6>
+                        <p class="card-text">{{ producto.category }}</p>
+                        <h6 class="card-subtitle text-danger">{{ producto.price }} €</h6>
+                        
+                    </div>
+                    <div class="container my-4">
+                        <a routerLink="producto/{{producto.id}}" class="btn btn-primary">
+                            Ver
+                        </a>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

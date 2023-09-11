@@ -1,0 +1,24 @@
+<nav class="bg-dark navbar-dark navbar sticky-top navbar-expand-sm"> 
+    <div class="collapse navbar-collapse">
+        <ul class="container navbar-nav">
+            <li [ngClass]="seleccionado == 1 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(1)">
+                <a routerLink="" class="nav-link"> Akafon </a>
+            </li>
+            <li [ngClass]="seleccionado == 2 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(2)">
+                <a routerLink="productos" class="nav-link"> Productos </a>
+            </li>
+            <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
+                <a routerLink="usuarios" class="nav-link text-danger"> Usuarios </a>
+            </li>
+            <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)">
+                <a routerLink="sobre-el-proyecto"  class="nav-link"> Sobre el proyecto </a>
+            </li>            
+        </ul>
+
+        <ul class="navbar-nav">
+            <li [ngClass]="seleccionado == 5 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(5)">
+                <a routerLink="carrito" class="nav-link text-danger"> Carrito </a>
+            </li>
+        </ul>
+    </div>
+</nav>

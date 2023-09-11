@@ -1,0 +1,23 @@
+<div *ngIf="producto">
+    <div class="container mt-4">
+        <div class="card">
+            <img src="{{ producto.thumbnail }}" class="card-img-top" alt="Producto">
+            <div class="card-body">
+                <h5 class="card-title">{{ producto.title }}</h5>
+                <p class="card-text">{{ producto.description }}</p>
+                <p class="card-text">Precio: {{ producto.price }} €</p>
+                <p class="card-text">Descuento: {{ producto.discountPercentage }}%</p>
+                <p class="card-text">Rating: {{ producto.rating }}</p>
+                <p class="card-text">Stock: {{ producto.stock }} unidades</p>
+                <p class="card-text">Marca: {{ producto.brand }}</p>
+                <p class="card-text">Categoría: {{ producto.category }}</p>
+            </div>
+            <div class="card-footer">
+                <button type="button" (click)="goBack()">Volver</button>
+            </div>
+        </div>
+        <a routerLink="/productos/producto/detalle/{{producto.id}}" class="btn btn-success">
+            Modificar datos producto
+        </a>
+    </div>
+</div>

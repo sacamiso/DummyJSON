@@ -1,0 +1,25 @@
+<div class="container">
+    <ul class="list-inline">
+        <!--Pagina actual = {{pagActual}} 
+        Numero total de paginas = {{numPagTotales}}
+        Numero total de elementos = {{numeroElementos}}
+        Tamaño pagina = {{tamPag}}-->
+        <li *ngIf="pagActual > 0" class="list-inline-item">
+            <button type="search" (click)="irAnterior()" class="btn btn-link">
+                Anterior
+            </button>
+        </li>
+        <li *ngFor="let pag of aux; index as i" class="list-inline-item">
+            <button type="search" (click)="cambiarPagina(i)" [ngClass]="i === pagActual?'btn btn-link active':'btn btn-link'">
+                {{i+1}}
+            </button>
+        </li>
+        <li *ngIf="pagActual < (numPagTotales-1)" class="list-inline-item">
+            <button type="search" (click)="irSiguiente()" class="btn btn-link">
+                Siguiente
+            </button>
+        </li>
+    </ul>
+    <p>El número total de elementos encontrados es {{numeroElementos}}</p> 
+</div>
+
