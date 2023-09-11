@@ -3,9 +3,9 @@
 
         <div class="card">
             <div class="card-body">
-                <div>
+                <div class="form-item">
                     <label for="id">ID:</label>
-                    <input id="id" type="text" formControlName="id" placeholder="Número identificador de producto" />
+                    <input id="id" class="form-control" type="text" formControlName="id" placeholder="Número identificador de producto" />
                 </div>
                 <div>
                     <label for="title">NOMBRE:</label>
@@ -46,7 +46,7 @@
 
         </div>
 
-        <button class="button" [disabled]="!productoForm.valid" type="submit">Guardar</button>
+        <button class="btn button" [disabled]="!productoForm.valid" type="submit">Guardar</button>
     </form>
 </div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
 import { constants } from 'src/app/core/constants';
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,8 @@ export class ProductComponent implements OnInit {
   cargado = false;
 
 
-  constructor(private readonly productService: ProductService) { }
+  constructor(private readonly productService: ProductService,
+    private readonly router: Router) { }
 
   ngOnInit() {
 
@@ -68,6 +70,11 @@ export class ProductComponent implements OnInit {
 
       }
     })
+  }
+
+  goToNewProduct() {
+    console.log('this.router.url', this.router.url)
+    this.router.navigate(['productos/producto/detalle']);
   }
 
   /* Al final creo que este método no me es necesarioi ya que con el anterior vale

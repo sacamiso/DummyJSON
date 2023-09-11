@@ -11,8 +11,8 @@ const routes: Routes = [
   {path: '', component:PaginaInicioComponent},
   {path: 'productos', component:ProductComponent},
   {path: 'productos/producto/:id', component:DetalleProductoComponent},
-  {path: 'productos/producto/detalle/:id', component:NuevoProductoComponent},
   {path: 'productos/producto/detalle', component:NuevoProductoComponent},
+  {path: 'productos/producto/detalle/edit/:id', component:NuevoProductoComponent},
 ];
 
  

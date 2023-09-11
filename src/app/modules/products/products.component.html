@@ -21,7 +21,7 @@
             
         </div>
 
-        <a routerLink="producto/detalle" class="btn btn-success">
+        <a (click)="goToNewProduct()" class="btn btn-success">
             Añadir un producto nuevo
         </a>
 
@@ -43,6 +43,9 @@
                     <div class="container my-4">
                         <a routerLink="producto/{{producto.id}}" class="btn btn-primary">
                             Ver
+                        </a>
+                        <a routerLink="" class="btn ">
+                            <img src="assets/icons/icono-papelera.png" alt="Eliminar articulo">
                         </a>
                     </div>
 
