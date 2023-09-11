@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
@@ -20,16 +21,28 @@ export class NuevoProductoComponent implements OnInit {
   cargado = false;
   id: number;
 
-  checkoutForm;
+  //checkoutForm;
+  name = new FormControl('');
+  productoForm = new FormGroup({
+    id: new FormControl(''),
+    title: new FormControl(''),
+    description: new FormControl(''),
+    price: new FormControl(''),
+    discountPercentage: new FormControl(''),
+    rating: new FormControl(''),
+    stock: new FormControl(''),
+    brand: new FormControl(''),
+    category: new FormControl(''),
+  });
 
   constructor(
     private route: ActivatedRoute,
     private readonly productService: ProductService,
     private location: Location,
     private formBuilder: FormBuilder
-  ) { 
+  ) {
     this.id = 0;
-    this.checkoutForm = this.formBuilder.group({
+    /*this.checkoutForm = this.formBuilder.group({
       id: '',
       title: '',
       description: '',
@@ -39,22 +52,39 @@ export class NuevoProductoComponent implements OnInit {
       stock: '',
       brand: '',
       category: ''
-    });
+    });*/
   }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    if(this.id==0){
+    if (this.id == 0) {
       this.iniciaProducto();
-      this.existe=false;
-    }else{
+      this.existe = false;
+    } else {
       this.getProduct();
-      this.existe=true;
+      this.cargaDatos();
+      this.existe = true;
     }
-    this.cargado=true;
+    this.cargado = true;
   }
 
-  iniciaProducto(){
+  cargaDatos() {
+    if (this.producto){
+      this.productoForm.patchValue({
+        id: this.producto.id,
+        title: this.producto.title,
+        description: this.producto.description,
+        price: this.producto.price,
+        discountPercentage: this.producto.discountPercentage,
+        rating: this.producto.rating,
+        stock: this.producto.stock,
+        brand: this.producto.brand,
+        category: this.producto.category,
+      });
+    }
+  }
+
+  iniciaProducto() {
     this.producto = {
       id: 0,
       title: "",
