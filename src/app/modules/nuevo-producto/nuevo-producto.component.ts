@@ -112,7 +112,7 @@ export class NuevoProductoComponent implements OnInit {
   }
 
   async getProduct() {
-    //En este caso no se puede emplear la estructura habitual de next, erroro, complete, ya que no podriamos hacer el await
+    //En este caso no se puede emplear la estructura habitual de next, error, complete, ya que no podriamos hacer el await
     //De la siguiente manera soluciono el problema de la sincronía a la hora de cargar los datos en el fomulario
     this.producto = await firstValueFrom(this.productService.getProductById(this.id));
   }

@@ -1,4 +1,3 @@
-<app-navegacion></app-navegacion>
 <div *ngIf="cargado" class="container mt-4">
     <form [formGroup]="productoForm" (ngSubmit)="guardar()">
 
@@ -17,22 +16,22 @@
                 <div class="d-flex flex-row justify-content-between mb-3">
                     <div class="form-item">
                         <label for="price">PRECIO (€):</label>
-                        <input id="price" class="form-control" type="text" formControlName="price"
+                        <input id="price" class="form-control" type="number" formControlName="price"
                             placeholder="Precio" />
                     </div>
                     <div class="form-item">
                         <label for="discountPercentage">DESCUENTO (%):</label>
-                        <input id="discountPercentage" class="form-control" type="text"
+                        <input id="discountPercentage" class="form-control" type="number"
                             formControlName="discountPercentage" placeholder="Descuento" />
                     </div>
                     <div class="form-item">
                         <label for="rating">VALORACIÓN:</label>
-                        <input id="rating" class="form-control" type="text" formControlName="rating"
+                        <input id="rating" class="form-control" type="number" formControlName="rating"
                             placeholder="Valoración" />
                     </div>
                     <div class="form-item">
                         <label for="stock">STOCK:</label>
-                        <input id="stock" class="form-control" type="text" formControlName="stock"
+                        <input id="stock" class="form-control" type="number" formControlName="stock"
                             placeholder="Stock" />
                     </div>
                 </div>

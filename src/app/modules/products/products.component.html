@@ -1,4 +1,4 @@
-<app-navegacion></app-navegacion>
+
 <section *ngIf="cargado">
     <div class="container">
         <div class="row">
@@ -41,29 +41,90 @@
 
                     </div>
                     <div class="container my-4">
-                        <a routerLink="producto/{{producto.id}}" class="btn btn-primary">
-                            Ver
-                        </a>
-                        
+
+                        <!--detalles de un producto-->
                         <!-- Botón genrear modal -->
-                        <button type="button" class="float-end" data-bs-toggle="modal" data-bs-target="#modalCerrar">
-                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalDetalles' + producto.id">
+                            Ver
                         </button>
 
                         <!-- Modal -->
-                        <div class="modal fade" id="modalCerrar" tabindex="-1" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                        <div class="modal fade" [id]="'modalDetalles' + producto.id" tabindex="-1"
+                            aria-labelledby="modalDetallesLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="modalBorrarLabel">Borrando el artículo {{ producto.title }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="modalDetallesLabel">Detalles del artículo {{
+                                            producto.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Está seguro que desea eliminar el producto {{ producto.title }} con id {{ producto.id }}?
+                                        <div class="container mt-4">
+                                            <div class="card">
+                                                <img src="{{ producto.thumbnail }}" class="card-img-top" alt="Producto">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ producto.title }}</h5>
+                                                    <p class="card-text">{{ producto.description }}</p>
+                                                    <p class="card-text">Precio: {{ producto.price }} €</p>
+                                                    <p class="card-text">Descuento: {{ producto.discountPercentage }}%
+                                                    </p>
+                                                    <p class="card-text">Valoración: {{ producto.rating }}</p>
+                                                    <p class="card-text">Stock: {{ producto.stock }} unidades</p>
+                                                    <p class="card-text">Marca: {{ producto.brand }}</p>
+                                                    <p class="card-text">Categoría: {{ producto.category }}</p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <a routerLink="/productos/producto/detalle/edit/{{producto.id}}"
+                                                        class="btn btn-success" data-bs-dismiss="modal">
+                                                        Modificar datos producto
+                                                    </a>
+                                                    
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!--Hasta aquí detalles de un producto con su modal-->
+
+
+
+                        <!-- Botón genrear modal -->
+                        <!-- <button type="button" class="float-end" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalCerrar' + producto.id">
+                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
+                        </button> -->
+
+                        <a class="btn float-end" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalCerrar' + producto.id">
+                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modalCerrar' + producto.id" tabindex="-1"
+                            aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">Borrando el artículo {{
+                                            producto.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que desea eliminar el producto {{ producto.title }} con id {{
+                                        producto.id }}?
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                                        <button type="button" class="btn btn-primary" (click)="eliminarProducto(producto.id)">Eliminar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            (click)="eliminarProducto(producto.id)">Eliminar</button>
                                     </div>
                                 </div>
                             </div>

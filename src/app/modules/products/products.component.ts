@@ -50,7 +50,7 @@ export class ProductComponent implements OnInit {
     this.productService.deleteProduct(id).subscribe({
       next: (response) => {
         this.pAux = response;
-        alert('El producto'+ this.pAux.title +'ha sido eliminado correctamente');
+        alert('El producto'+ this.pAux.title +' ha sido eliminado correctamente');
       },
       error: (error) => {
         console.log(error);
