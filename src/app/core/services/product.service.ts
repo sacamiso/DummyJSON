@@ -49,4 +49,8 @@ export class ProductService {
     return this.http.delete<Product>(`${this.apiUrl}/products/${id}`);
   }
 
+  getCategorias(): Observable<Array<string>> {
+    return this.http.get<Array<string>>(`${this.apiUrl}/products/categories`);
+  }
+
 }

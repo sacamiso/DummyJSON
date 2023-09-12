@@ -1,40 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
-
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.component.html',
   styleUrls: ['./nuevo-producto.component.css']
 })
+
 export class NuevoProductoComponent implements OnInit {
 
   producto: Product | undefined;
-  mensaje: string = "";
   existe = false;
   cargado = false;
   id: number;
-
-  name = new FormControl('');
   productoForm: FormGroup; //Si lo declaro solo así tengo que inicializarlo en el constructor
-  /*productoForm = new FormGroup({
-    id: new FormControl(''),
-    title: new FormControl(''),
-    description: new FormControl(''),
-    price: new FormControl(''),
-    discountPercentage: new FormControl(''),
-    rating: new FormControl(''),
-    stock: new FormControl(''),
-    brand: new FormControl(''),
-    category: new FormControl(''),
-  });*/
-
+  categorias:Array<string> = [];
+  
   constructor(
     private route: ActivatedRoute,
     private readonly productService: ProductService,
@@ -42,34 +29,20 @@ export class NuevoProductoComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    console.log('sara2', this.id)
     this.productoForm = this.formBuilder.group({
-      id: [this.id, Validators.required],
       title: [null, Validators.required],
       description: null,
-      price: [null,Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])  ],
-      discountPercentage: [null, Validators.compose([Validators.pattern(/^\d+$/), Validators.required]) ],
-      rating: null,
-      stock: null,
-      brand: null,
-      category: null
+      price: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
+      discountPercentage: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
+      rating: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
+      stock:  [null, Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
+      brand: [null, Validators.required],
+      category: [null, Validators.required]
     });
   }
 
-  async ngOnInit() {
-    //Tal y como está declarado tiene que estar en el constructor
-    /*this.productoForm = this.formBuilder.group({
-      id: ['', Validators.required],
-      title: ['', Validators.required],
-      description: [''],
-      price: ['',Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])  ],
-      discountPercentage: [''],
-      rating: [''],
-      stock: [''],
-      brand: [''],
-      category: ['']
-    });*/
-    
+  ngOnInit()  {
+    this.getCategorias();
     this.iniciaProducto();
     if (this.id == 0) {
       this.existe = false;
@@ -83,14 +56,11 @@ export class NuevoProductoComponent implements OnInit {
   async cargaDatos() {
     await this.getProduct();
 
-    console.log(this.producto, '2')
-
-    if(!this.producto) {
+    if (!this.producto) {
       return;
     }
 
     this.productoForm.patchValue({
-      id: this.producto.id,
       title: this.producto.title,
       description: this.producto.description,
       price: this.producto.price,
@@ -119,58 +89,64 @@ export class NuevoProductoComponent implements OnInit {
   }
 
   guardar() {
-    if (this.producto) {
-      if (this.existe) {
-        this.updateProduct();
-      } else {
-        this.guardarNuevoProducto();
-      }
+    if (!this.producto) {
+      return;
     }
+
+    if (this.existe) {
+      this.updateProduct();
+    } else {
+      this.guardarNuevoProducto();
+    }
+  }
+
+  getCategorias() {
+    this.productService.getCategorias().subscribe({
+      next: (response) => {
+        this.categorias = response;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   async getProduct() {
-    // this.productService.getProductById(this.id).subscribe({
-    //   next: (response: Product) => {
-    //     this.producto = response;
-    //   },
-    //   error: (error) => {
-    //     console.log(error);
-    //   },
-    //   complete: () => {
-    //     this.cargado = true;
-    //     console.log(this.producto, 'sara')
-    //   }
-    // })
-    this.producto = await this.productService.getProductById(this.id).toPromise();
+    //En este caso no se puede emplear la estructura habitual de next, erroro, complete, ya que no podriamos hacer el await
+    //De la siguiente manera soluciono el problema de la sincronía a la hora de cargar los datos en el fomulario
+    this.producto = await firstValueFrom(this.productService.getProductById(this.id));
   }
 
   updateProduct() {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (this.producto) {
-      this.productService.updateProduct(id, this.producto).subscribe({
-        next: (response) => {
-          this.producto = response;
-          this.mensaje = "Producto actualizado correctamente";
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
+    if (!this.producto) {
+      return;
     }
+
+    this.productService.updateProduct(this.id, this.producto).subscribe({
+      next: (response) => {
+        this.producto = response;
+        alert('Actualizado correctamente el artículo ' + this.producto.title);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   guardarNuevoProducto() {
-    if (this.producto) {
-      this.productService.addProduct(this.producto).subscribe({
-        next: (response) => {
-          this.producto = response;
-          this.mensaje = "Producto añadido correctamente";
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
+    if (!this.producto) {
+      return;
     }
+
+    this.productService.addProduct(this.producto).subscribe({
+      next: (response) => {
+        this.producto = response;
+        alert('Guardado correctamente el artículo ' + this.producto.title);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   goBack() {

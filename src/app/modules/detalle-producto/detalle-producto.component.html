@@ -7,17 +7,18 @@
                 <p class="card-text">{{ producto.description }}</p>
                 <p class="card-text">Precio: {{ producto.price }} €</p>
                 <p class="card-text">Descuento: {{ producto.discountPercentage }}%</p>
-                <p class="card-text">Rating: {{ producto.rating }}</p>
+                <p class="card-text">Valoración: {{ producto.rating }}</p>
                 <p class="card-text">Stock: {{ producto.stock }} unidades</p>
                 <p class="card-text">Marca: {{ producto.brand }}</p>
                 <p class="card-text">Categoría: {{ producto.category }}</p>
             </div>
             <div class="card-footer">
-                <button type="button" (click)="goBack()">Volver</button>
+                <a routerLink="/productos/producto/detalle/edit/{{producto.id}}" class="btn btn-success">
+                    Modificar datos producto
+                </a>
+                <button type="button" class="btn btn-primary float-end" (click)="goBack()">Volver</button>
             </div>
         </div>
-        <a routerLink="/productos/producto/detalle/edit/{{producto.id}}" class="btn btn-success">
-            Modificar datos producto
-        </a>
+        
     </div>
 </div>

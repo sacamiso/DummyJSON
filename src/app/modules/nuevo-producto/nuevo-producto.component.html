@@ -1,52 +1,64 @@
+<app-navegacion></app-navegacion>
 <div *ngIf="cargado" class="container mt-4">
     <form [formGroup]="productoForm" (ngSubmit)="guardar()">
 
         <div class="card">
             <div class="card-body">
-                <div class="form-item">
-                    <label for="id">ID:</label>
-                    <input id="id" class="form-control" type="text" formControlName="id" placeholder="Número identificador de producto" />
-                </div>
-                <div>
+                <div class="form-item mb-3">
                     <label for="title">NOMBRE:</label>
-                    <input id="title" type="text" formControlName="title" placeholder="Título de producto" />
+                    <input id="title" class="form-control" type="text" formControlName="title"
+                        placeholder="Título de producto" />
                 </div>
-                <div>
+                <div class="form-item mb-3">
                     <label for="description">DESCRIPCIÓN:</label>
-                    <input id="description" type="text" formControlName="description"
-                        placeholder="Descripción de producto" />
+                    <textarea id="description" type="text" formControlName="description" class="form-control"
+                        placeholder="Descripción de producto"></textarea>
                 </div>
-                <div>
-                    <label for="price">PRECIO (€):</label>
-                    <input id="price" type="text" formControlName="price" placeholder="Precio" />
+                <div class="d-flex flex-row justify-content-between mb-3">
+                    <div class="form-item">
+                        <label for="price">PRECIO (€):</label>
+                        <input id="price" class="form-control" type="text" formControlName="price"
+                            placeholder="Precio" />
+                    </div>
+                    <div class="form-item">
+                        <label for="discountPercentage">DESCUENTO (%):</label>
+                        <input id="discountPercentage" class="form-control" type="text"
+                            formControlName="discountPercentage" placeholder="Descuento" />
+                    </div>
+                    <div class="form-item">
+                        <label for="rating">VALORACIÓN:</label>
+                        <input id="rating" class="form-control" type="text" formControlName="rating"
+                            placeholder="Valoración" />
+                    </div>
+                    <div class="form-item">
+                        <label for="stock">STOCK:</label>
+                        <input id="stock" class="form-control" type="text" formControlName="stock"
+                            placeholder="Stock" />
+                    </div>
                 </div>
-                <div>
-                    <label for="discountPercentage">DESCUENTO (%):</label>
-                    <input id="discountPercentage" type="text" formControlName="discountPercentage"
-                        placeholder="Descuento" />
-                </div>
-                <div>
-                    <label for="rating">RATING:</label>
-                    <input id="rating" type="text" formControlName="rating" placeholder="Rating" />
-                </div>
-                <div>
-                    <label for="stock">STOCK:</label>
-                    <input id="stock" type="text" formControlName="stock" placeholder="Stock" />
-                </div>
-                <div>
+                <div class="form-item mb-3">
                     <label for="brand">MARCA:</label>
-                    <input id="brand" type="text" formControlName="brand" placeholder="Marca" />
+                    <input id="brand" class="form-control" type="text" formControlName="brand" placeholder="Marca" />
                 </div>
-                <div>
+                <div class="form-item mb-3">
                     <label for="category">CATEGORÍA:</label>
-                    <input id="category" type="text" formControlName="category" placeholder="Categoria" />
+                    <select id="category" class="form-control" formControlName="category">
+                        <option [value]="null">Selecciona una categoría</option>
+                        <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+                    </select>
                 </div>
 
             </div>
+            <div class="card-footer">
+                <button class="btn btn-success" [disabled]="!productoForm.valid" type="submit">Guardar</button>
+                <button type="button" class="btn btn-primary float-end" (click)="goBack()">Volver</button>
+            </div>
+
 
         </div>
 
-        <button class="btn button" [disabled]="!productoForm.valid" type="submit">Guardar</button>
+
+
     </form>
 </div>
 

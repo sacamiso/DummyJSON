@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
         <a (click)="goToNewProduct()" class="btn btn-success">
@@ -38,15 +38,36 @@
                         <h6 class="card-subtitle mb-2 text-muted">{{ producto.brand }}</h6>
                         <p class="card-text">{{ producto.category }}</p>
                         <h6 class="card-subtitle text-danger">{{ producto.price }} €</h6>
-                        
+
                     </div>
                     <div class="container my-4">
                         <a routerLink="producto/{{producto.id}}" class="btn btn-primary">
                             Ver
                         </a>
-                        <a routerLink="" class="btn ">
-                            <img src="assets/icons/icono-papelera.png" alt="Eliminar articulo">
-                        </a>
+                        
+                        <!-- Botón genrear modal -->
+                        <button type="button" class="float-end" data-bs-toggle="modal" data-bs-target="#modalCerrar">
+                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modalCerrar" tabindex="-1" aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">Borrando el artículo {{ producto.title }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que desea eliminar el producto {{ producto.title }} con id {{ producto.id }}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" (click)="eliminarProducto(producto.id)">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

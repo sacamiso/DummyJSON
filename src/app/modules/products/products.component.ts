@@ -1,10 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
 import { constants } from 'src/app/core/constants';
 import { Router } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-product',
@@ -19,34 +17,25 @@ export class ProductComponent implements OnInit {
   pagina: number = 0;
   tamPag = constants.tamPags;
   cargado = false;
-
+  pAux: Product | undefined; 
 
   constructor(private readonly productService: ProductService,
     private readonly router: Router) { }
 
-  ngOnInit() {
-
+  ngOnInit(): void {
     this.cargarPagina(0);
-
   }
 
-  cargarPagina(pag: number) {
-    //console.log('He pasado por el segundo lugar'); 
-    //console.log(pag);   
+  cargarPagina(pag: number) {  
     this.pagina = pag;
-    this.listaElementosMostrar(this.tamPag, this.tamPag*this.pagina);
+    this.listaElementosMostrar(this.tamPag, this.tamPag * this.pagina);
   }
 
-  listaElementosMostrar(limit: number, skip: number){
-    //console.log('limit '+limit);
-    //console.log('skip '+skip);
-    this.productService.getProductsInterval(limit,skip).subscribe({
+  listaElementosMostrar(limit: number, skip: number) {
+    this.productService.getProductsInterval(limit, skip).subscribe({
       next: (response) => {
-        console.log('He pasado por el tercer lugar'); 
-        
         this.productos = response.products;
         this.numeroProductos = response.total;
-        //console.log(this.productos);
       },
       error: (error) => {
         console.log(error);
@@ -57,7 +46,17 @@ export class ProductComponent implements OnInit {
     })
   }
 
-   
+  eliminarProducto(id: number) {
+    this.productService.deleteProduct(id).subscribe({
+      next: (response) => {
+        this.pAux = response;
+        alert('El producto'+ this.pAux.title +'ha sido eliminado correctamente');
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 
   search(search: string) {
     this.productService.searchProduct(search).subscribe({
@@ -67,7 +66,7 @@ export class ProductComponent implements OnInit {
         console.log(this.productos);
       },
       error: (error) => {
-
+        console.log(error);
       }
     })
   }
@@ -76,21 +75,6 @@ export class ProductComponent implements OnInit {
     console.log('this.router.url', this.router.url)
     this.router.navigate(['productos/producto/detalle']);
   }
-
-  /* Al final creo que este método no me es necesarioi ya que con el anterior vale
   
-  getAll() {
-    this.productService.getAllProducts().subscribe({
-      next: (response) => {
-        this.productos = response.products;
-        this.numeroProductos = response.total;
-        console.log(this.productos);
-      },
-      error: (error) => {
-
-      }
-    })
-  }*/
-
 }
 

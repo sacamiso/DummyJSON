@@ -38,8 +38,6 @@ export class DetalleProductoComponent implements OnInit {
     })
   }
 
-  
-
   goBack(): void {
     this.location.back();
   }
