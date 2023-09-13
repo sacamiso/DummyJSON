@@ -11,6 +11,7 @@ import { PaginadorComponent } from './modules/paginador/paginador.component';
 import { NuevoProductoComponent } from './modules/nuevo-producto/nuevo-producto.component';
 import { NavegacionComponent } from './modules/navegacion/navegacion.component';
 import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.component';
+import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.com
     PaginadorComponent,
     NuevoProductoComponent,
     NavegacionComponent,
-    PaginaInicioComponent
+    PaginaInicioComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

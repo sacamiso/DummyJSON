@@ -1,0 +1,128 @@
+<section *ngIf="cargado">
+    <div class="container">
+        <div class="row">
+            <h1 class="col-6 my-4 font-weight-bold">USUARIOS</h1>
+            <div class="col-6 my-4 ">
+                <div class="row">
+                    <div class="col-8 mb-4">
+                        <div id="search-component">
+                            <input #searchBox id="search-box" type="search" class="form-control"
+                                placeholder="Buscar usuarios" />
+                        </div>
+                    </div>
+                    <div class="col-4 mb-4">
+                        <button class="btn btn-danger btn-block" type="search" (click)="search(searchBox.value)">
+                            Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <a (click)="goToDetalleUsuario()" class="btn btn-success">
+            Añadir un nuevo usuario
+        </a>
+
+        <app-paginador [numeroElementos]="numeroUsuarios" (pagina)="cargarPagina($event)"></app-paginador>
+
+        <ul class="list-unstyled row">
+            <li *ngFor="let usuario of usuarios" class="col-md-3 mb-4">
+                <div class="card h-100">
+                    <div class="img-container" style=" justify-content: center;">
+                        <img src="{{ usuario.image }}" alt="fotoDePerfil" class="card-img-top" />
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ usuario.firstName }} {{ usuario.lastName }}</h5>
+                        <p class="card-text">{{usuario.birthDate}} {{ usuario.age }} años</p>
+                        <p class="card-text">{{ usuario.age }} años</p>
+                        <p class="card-text">{{ usuario.username }}</p>
+                        <h6 class="card-subtitle mb-2 text-primary">{{ usuario.email }}</h6>
+                    </div>
+                    <div class="container my-4">
+                        <!--detalles de un usuario-->
+                        <!-- Botón generar el modal -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalDetalles' + usuario.id">
+                            Ver
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modalDetalles' + usuario.id" tabindex="-1"
+                            aria-labelledby="modalDetallesLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalDetallesLabel">Detalles del usuario {{
+                                            usuario.username }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container mt-4">
+                                            <div class="card">
+                                                <img src="{{ usuario.image }}" class="card-img-top" alt="Producto">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">USUARIO: {{ usuario.username }}</h5>
+                                                    <p class="card-text">Nombre: {{ usuario.firstName }} </p>
+                                                    <p class="card-text">Apellido: {{ usuario.lastName }} </p>
+                                                    <p class="card-text">Fecha de nacimiento: {{ usuario.birthDate }} </p>
+                                                    <p class="card-text">Edad: {{ usuario.age }} </p>
+                                                    <p class="card-text">Email: {{ usuario.email }} </p>
+                                                    <p class="card-text">Género: {{ usuario.gender }} </p>
+                                                    <p class="card-text">Teléfono: {{ usuario.phone }} </p>
+                                                    <h5 class="card-title">DIRECCIÓN: {{ usuario.address.address }}</h5>
+                                                    <p class="card-text">Ciudad: {{ usuario.address.city }} </p>
+                                                    <p class="card-text">Códigp postal: {{ usuario.address.postalCode }} </p>
+                                                    <p class="card-text">Estado: {{ usuario.address.state }} </p>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <a routerLink="/usuarios/usuario/detalle/edit/{{usuario.id}}"
+                                                        class="btn btn-success" data-bs-dismiss="modal">
+                                                        Modificar usuario
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Hasta aquí detalles de un usuario con su modal-->
+                        <!-- Botón genrear modal -->
+                        <a class="btn float-end" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalEliminar' + usuario.id">
+                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar usuario">
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modalEliminar' + usuario.id" tabindex="-1"
+                            aria-labelledby="modalBorrarLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalBorrarLabel">Borrando el usuario {{
+                                            usuario.username }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Está seguro que desea eliminar el usuario{{ usuario.username  }} con id {{
+                                        usuario.id }}?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                                            (click)="eliminarUsuario(usuario.id)">Eliminar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+        </ul>
+    </div>
+</section>

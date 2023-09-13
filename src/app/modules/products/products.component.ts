@@ -72,7 +72,7 @@ export class ProductComponent implements OnInit {
   }
 
   goToNewProduct() {
-    console.log('this.router.url', this.router.url)
+    //console.log('this.router.url', this.router.url)
     this.router.navigate(['productos/producto/detalle']);
   }
   
