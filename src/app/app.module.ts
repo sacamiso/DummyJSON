@@ -12,6 +12,7 @@ import { NuevoProductoComponent } from './modules/nuevo-producto/nuevo-producto.
 import { NavegacionComponent } from './modules/navegacion/navegacion.component';
 import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +21,8 @@ import { UsuariosComponent } from './modules/usuarios/usuarios.component';
     NuevoProductoComponent,
     NavegacionComponent,
     PaginaInicioComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    NuevoUsuarioComponent
   ],
   imports: [
     BrowserModule,

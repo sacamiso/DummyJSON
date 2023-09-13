@@ -1,5 +1,5 @@
 import { areAllEquivalent } from '@angular/compiler/src/output/output_ast';
-import { Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, OnChanges, SimpleChanges} from '@angular/core';
 import { constants } from 'src/app/core/constants';
 
 @Component({
@@ -7,7 +7,7 @@ import { constants } from 'src/app/core/constants';
   templateUrl: './paginador.component.html',
   styleUrls: ['./paginador.component.css']
 })
-export class PaginadorComponent implements OnInit {
+export class PaginadorComponent implements OnInit, OnChanges {
 
   @Input() numeroElementos: number = 0;
   @Output() pagina = new EventEmitter<number>();
@@ -17,6 +17,10 @@ export class PaginadorComponent implements OnInit {
   numPagTotales: number = 1; //puede que no haya ningún elemento
 
   aux: Array<number> = [];
+
+  ngOnChanges(changes: SimpleChanges): void {
+      
+  }
   
   ngOnInit(): void {
     console.log("numero de elementos al pasar por onInit");

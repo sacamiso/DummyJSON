@@ -30,7 +30,7 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
-  updateProduct(id: number, usuario: User): Observable<User> {
+  updateUser(id: number, usuario: User): Observable<User> {
     return this.http.put<User>(`${this.apiUrl}/users/${id}`, usuario);
   }
 

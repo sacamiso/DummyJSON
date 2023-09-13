@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
 import { constants } from 'src/app/core/constants';
@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 })
 
 export class ProductComponent implements OnInit {
+
+  @ViewChild('searchBox') searchBox: HTMLInputElement  | undefined;
 
   productos: Array<Product> = [];
   numeroProductos: number = 0;
@@ -32,18 +34,50 @@ export class ProductComponent implements OnInit {
   }
 
   listaElementosMostrar(limit: number, skip: number) {
-    this.productService.getProductsInterval(limit, skip).subscribe({
-      next: (response) => {
-        this.productos = response.products;
-        this.numeroProductos = response.total;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado = true;
+    if(this.searchBox){
+      if(this.searchBox.value != ""){
+        this.productService.searchProductInterval(this.searchBox.value,limit, skip).subscribe({
+          next: (response) => {
+            this.productos = response.products;
+            this.numeroProductos = response.total;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            this.cargado = true;
+          }
+        })
+      }else{
+        this.productService.getProductsInterval(limit, skip).subscribe({
+          next: (response) => {
+            this.productos = response.products;
+            this.numeroProductos = response.total;
+          },
+          error: (error) => {
+            console.log(error);
+          },
+          complete: () => {
+            this.cargado = true;
+          }
+        })
       }
-    })
+    }else{
+      this.productService.getProductsInterval(limit, skip).subscribe({
+        next: (response) => {
+          this.productos = response.products;
+          this.numeroProductos = response.total;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          this.cargado = true;
+        }
+      })
+    }
+    
+    
   }
 
   eliminarProducto(id: number) {

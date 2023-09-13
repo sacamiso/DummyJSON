@@ -1,0 +1,194 @@
+<div *ngIf="cargado" class="container mt-4">
+    <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+        <div class="form-group">
+            <div class="form-item mb-3">
+                <label for="firstName">NOMBRE DE PILA:</label>
+                <input id="firstName" class="form-control" type="text" formControlName="firstName"
+                    placeholder="Nombre de pila" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="lastName">APELLIDO:</label>
+                <input id="lastName" class="form-control" type="text" formControlName="lastName"
+                    placeholder="Apellido" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="maidenName">APELLIDO DE SOLTER@:</label>
+                <input id="maidenName" class="form-control" type="text" formControlName="maidenName"
+                    placeholder="Apellido" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="age">EDAD:</label>
+                <input id="age" class="form-control" type="number" formControlName="age" placeholder="Edad" />
+            </div>
+            <div class="form-item mb-3">
+                <label>GÉNERO:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+                    <label class="form-check-label" for="male">Masculino</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                    <label class="form-check-label" for="female">Femenino</label>
+                </div>
+            </div>
+            <div class="form-item mb-3">
+                <label for="email">EMAIL:</label>
+                <input id="email" class="form-control" type="text" formControlName="email" placeholder="Email" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="phone">TELÉFONO:</label>
+                <input id="phone" class="form-control" type="text" formControlName="phone" placeholder="Email" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="username">NOMBRE DE USUARIO:</label>
+                <input id="username" class="form-control" type="text" formControlName="username"
+                    placeholder="Nombre de usuario" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="password">CONTRASEÑA:</label>
+                <input id="password" class="form-control" type="password" formControlName="password"
+                    placeholder="Contraseña" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="birthDate">FECHA DE NACIMINETO:</label>
+                <input id="birthDate" class="form-control" type="date" formControlName="birthDate"
+                    placeholder="Fecha de nacimiento" />
+            </div>
+            <div class="form-item mb-3">
+                <label>GRUPO SANGUÍNEO:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="A-" value="A-">
+                    <label class="form-check-label" for="A-">A-</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="A+" value="A+">
+                    <label class="form-check-label" for="A+">A+</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="B-" value="B-">
+                    <label class="form-check-label" for="B-">B-</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="B+" value="B+">
+                    <label class="form-check-label" for="B+">B+</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="AB-" value="AB-">
+                    <label class="form-check-label" for="AB-">AB-</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="AB+" value="AB+">
+                    <label class="form-check-label" for="AB+">AB+</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="0-" value="0-">
+                    <label class="form-check-label" for="0-">0-</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="bloodGroup" id="0+" value="0+">
+                    <label class="form-check-label" for="0+">0+</label>
+                </div>
+            </div>
+            <div class="form-item mb-3">
+                <label for="height">ESTATURA (cm):</label>
+                <input id="height" class="form-control" type="number" formControlName="height" placeholder="Estatura" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="weight">PESO (kg):</label>
+                <input id="weight" class="form-control" type="number" formControlName="weight" placeholder="Peso" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="eyeColor">COLOR DE OJOS:</label>
+                <input id="eyeColor" class="form-control" type="text" formControlName="eyeColor"
+                    placeholder="Color de ojos" />
+            </div>
+            <div formGroupName="hair">
+                <h2>PELO</h2>
+                <div class="form-item mb-3">
+                    <label for="color">COLOR:</label>
+                    <input id="color" class="form-control" type="text" formControlName="color"
+                        placeholder="Color" />
+                </div>
+                <div class="form-item mb-3">
+                    <label for="type">TIPO:</label>
+                    <input id="type" class="form-control" type="text" formControlName="type"
+                        placeholder="Tipo" />
+                </div>
+            </div>
+            <div class="form-item mb-3">
+                <label for="domain">DOMINIO:</label>
+                <input id="domain" class="form-control" type="text" formControlName="domain"
+                    placeholder="Dominio" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="ip">IP:</label>
+                <input id="ip" class="form-control" type="text" formControlName="ip"
+                    placeholder="IP" />
+            </div>
+            <div formGroupName="address">
+                <h2>DIRECCIÓN</h2>
+                <div class="form-item mb-3">
+                    <label for="address">DIRECCIÓN:</label>
+                    <input id="address" class="form-control" type="text" formControlName="address"
+                        placeholder="Dirección" />
+                </div>
+                <div class="form-item mb-3">
+                    <label for="city">CIUDAD:</label>
+                    <input id="city" class="form-control" type="text" formControlName="city"
+                        placeholder="Ciudad" />
+                </div>
+                <div formGroupName="coordinates">
+                    <h3>COORDENADAS</h3>
+                    <div class="form-item mb-3">
+                        <label for="lat">LATITUD:</label>
+                        <input id="lat" class="form-control" type="number" formControlName="lat"
+                            placeholder="Latitud" />
+                    </div>
+                    <div class="form-item mb-3">
+                        <label for="lng">LONGITUD:</label>
+                        <input id="lng" class="form-control" type="number" formControlName="lng"
+                            placeholder="Longitud" />
+                    </div>
+                </div>
+                <div class="form-item mb-3">
+                    <label for="postalCode">CÓDIGO POSTAL:</label>
+                    <input id="postalCode" class="form-control" type="text" formControlName="postalCode"
+                        placeholder="Código postal" />
+                </div>
+                <div class="form-item mb-3">
+                    <label for="state">ESTADO:</label>
+                    <input id="state" class="form-control" type="text" formControlName="state"
+                        placeholder="Estado" />
+                </div>
+            </div>
+            <div class="form-item mb-3">
+                <label for="macAddress">MAC:</label>
+                <input id="macAddress" class="form-control" type="text" formControlName="macAddress"
+                    placeholder="mac" />
+            </div>
+            <div class="form-item mb-3">
+                <label for="university">UNIVERSIDAD:</label>
+                <input id="university" class="form-control" type="text" formControlName="university"
+                    placeholder="Universidad" />
+            </div>
+            <div formGroupName="bank">
+                <h2>DATOS BANCARIOS</h2>
+                <div class="form-item mb-3">
+                    <label for="cardExpire">EXPITRACIÓN DE LA TARJETA:</label>
+                    <input id="cardExpire" class="form-control" type="date" formControlName="cardExpire"
+                        placeholder="Fecha de expiiración" />
+                </div>
+                <div class="form-item mb-3">
+                    <label for="cardNumber">NÚMERO DE TARJETA:</label>
+                    <input id="cardNumber" class="form-control" type="text" formControlName="cardNumber"
+                        placeholder="Número de tarjeta" />
+                </div>
+                <div class="form-item mb-3">
+                    <label for="cardType">TIPO DE TARJETA:</label>
+                    <input id="cardType" class="form-control" type="text" formControlName="cardType"
+                        placeholder="Tipo de tarjeta" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

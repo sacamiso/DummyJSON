@@ -5,6 +5,7 @@ import { ProductComponent } from 'src/app/modules/products/products.component';
 import { NuevoProductoComponent } from 'src/app/modules/nuevo-producto/nuevo-producto.component';
 import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
+import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,8 @@ const routes: Routes = [
   {path: 'productos/producto/detalle', component:NuevoProductoComponent},
   {path: 'productos/producto/detalle/edit/:id', component:NuevoProductoComponent},
   {path: 'usuarios', component:UsuariosComponent},
+  {path: 'usuarios/usuario/detalle', component:NuevoUsuarioComponent},
+  {path: 'usuarios/usuario/detalle/edit/:id', component:NuevoUsuarioComponent},
 ];
 
  
