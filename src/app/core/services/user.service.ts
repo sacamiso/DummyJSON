@@ -26,6 +26,10 @@ export class UserService {
     return this.http.get<UserResponse>(`${this.apiUrl}/users/search?q=${paramBusqueda}`);
   }
 
+  searchUsertInterval(term: string, limit: number, skip: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/users/search?q=${term}&limit=${limit}&skip=${skip}`);
+  }
+
   getUserById(id: number): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
@@ -40,5 +44,9 @@ export class UserService {
 
   deleteUser(id: number): Observable<User> {
     return this.http.delete<User>(`${this.apiUrl}/users/${id}`);
+  }
+
+  filtrarPorEdad(edad: number, limit: number, skip: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/users/filter?key=age&value=${edad}&limit=${limit}&skip=${skip}`);
   }
 }

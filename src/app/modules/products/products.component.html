@@ -1,4 +1,3 @@
-
 <section *ngIf="cargado">
     <div class="container">
         <div class="row">
@@ -21,11 +20,26 @@
 
         </div>
 
-        <a (click)="goToNewProduct()" class="btn btn-success">
+        <a (click)="goToNewProduct()" class="btn btn-success mb-4">
             Añadir un producto nuevo
         </a>
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos4(10)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
-        <app-paginador [numeroElementos]="numeroProductos" (pagina)="cargarPagina($event)"></app-paginador>
+        <app-paginador [numeroElementos]="numeroProductos" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
+
         <ul class="list-unstyled row">
             <li *ngFor="let producto of productos" class="col-md-3 mb-4">
                 <div class="card h-100">
@@ -80,20 +94,17 @@
                                                         class="btn btn-success" data-bs-dismiss="modal">
                                                         Modificar datos producto
                                                     </a>
-                                                    
+
                                                 </div>
                                             </div>
 
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
                         <!--Hasta aquí detalles de un producto con su modal-->
-
-
-
                         <!-- Botón genrear modal -->
                         <!-- <button type="button" class="float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalCerrar' + producto.id">

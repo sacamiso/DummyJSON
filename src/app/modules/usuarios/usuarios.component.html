@@ -14,17 +14,54 @@
                         <button class="btn btn-danger btn-block" type="search" (click)="search(searchBox.value)">
                             Buscar
                         </button>
+                        <a class="btn ">
+                            <img src="assets/icons/filtro.png" width="32" height="32" alt="Filtros"
+                                (click)="activarFiltros()">
+                        </a>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <a (click)="goToDetalleUsuario()" class="btn btn-success">
+        <a (click)="goToDetalleUsuario()" class="btn btn-success mb-4">
             Añadir un nuevo usuario
         </a>
+        <div *ngIf="verFiltros" class="row">
 
-        <app-paginador [numeroElementos]="numeroUsuarios" (pagina)="cargarPagina($event)"></app-paginador>
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inpuEdad">Edad</span>
+                    </div>
+                    <input aria-describedby="inpuEdad" aria-label="Default" type="number" class="form-control" [(ngModel)]="edad" placeholder="Edad" />
+                </div>
+            </div>
+
+            <div class="col-4 mb-4">
+                <button class="btn btn-danger btn-block" (click)="filtrar()">
+                    Aplicar filtros
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-md-auto">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Número elementos por página</span>
+                    </div>
+                    <select class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"
+                        [(ngModel)]="tamPag" id="tamPagina">
+                        <option *ngFor="let opcion of Multiplos4(10)" [value]="opcion">{{ opcion }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+
+
+        <app-paginador [numeroElementos]="numeroUsuarios" [tamPag]="tamPag"
+            (pagina)="cargarPagina($event)"></app-paginador>
 
         <ul class="list-unstyled row">
             <li *ngFor="let usuario of usuarios" class="col-md-3 mb-4">
@@ -34,7 +71,7 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ usuario.firstName }} {{ usuario.lastName }}</h5>
-                        <p class="card-text">{{usuario.birthDate}} {{ usuario.age }} años</p>
+                        <p class="card-text">{{usuario.birthDate}}</p>
                         <p class="card-text">{{ usuario.age }} años</p>
                         <p class="card-text">{{ usuario.username }}</p>
                         <h6 class="card-subtitle mb-2 text-primary">{{ usuario.email }}</h6>
@@ -66,14 +103,16 @@
                                                     <h5 class="card-title">USUARIO: {{ usuario.username }}</h5>
                                                     <p class="card-text">Nombre: {{ usuario.firstName }} </p>
                                                     <p class="card-text">Apellido: {{ usuario.lastName }} </p>
-                                                    <p class="card-text">Fecha de nacimiento: {{ usuario.birthDate }} </p>
+                                                    <p class="card-text">Fecha de nacimiento: {{ usuario.birthDate }}
+                                                    </p>
                                                     <p class="card-text">Edad: {{ usuario.age }} </p>
                                                     <p class="card-text">Email: {{ usuario.email }} </p>
                                                     <p class="card-text">Género: {{ usuario.gender }} </p>
                                                     <p class="card-text">Teléfono: {{ usuario.phone }} </p>
                                                     <h5 class="card-title">DIRECCIÓN: {{ usuario.address.address }}</h5>
                                                     <p class="card-text">Ciudad: {{ usuario.address.city }} </p>
-                                                    <p class="card-text">Códigp postal: {{ usuario.address.postalCode }} </p>
+                                                    <p class="card-text">Códigp postal: {{ usuario.address.postalCode }}
+                                                    </p>
                                                     <p class="card-text">Estado: {{ usuario.address.state }} </p>
                                                 </div>
                                                 <div class="card-footer">
@@ -89,6 +128,31 @@
                             </div>
                         </div>
                         <!--Hasta aquí detalles de un usuario con su modal-->
+
+
+                        <a class="btn float-end" data-bs-toggle="modal"
+                            [attr.data-bs-target]="'#modalCarrito' + usuario.id" >
+                            <img src="assets/icons/carrito.jpg" width="32" height="32" alt="Ver carrito">
+                        </a>
+
+                        <!-- Modal -->
+                        <div class="modal fade" [id]="'modalCarrito' + usuario.id" tabindex="-1"
+                            aria-labelledby="modalCarritoLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalCarritoLabel">Carrito de {{
+                                            usuario.username }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        carrito falta lógica
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- Botón genrear modal -->
                         <a class="btn float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalEliminar' + usuario.id">
@@ -107,7 +171,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Está seguro que desea eliminar el usuario{{ usuario.username  }} con id {{
+                                        ¿Está seguro que desea eliminar el usuario{{ usuario.username }} con id {{
                                         usuario.id }}?
                                     </div>
                                     <div class="modal-footer">

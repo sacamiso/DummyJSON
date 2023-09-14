@@ -14,9 +14,14 @@ export class UsuariosComponent implements OnInit {
   usuarios: Array<User> = [];
   numeroUsuarios: number = 0;
   pagina: number = 0;
-  tamPag = constants.tamPags;
+  tamPag: number = constants.tamPags;
   cargado = false;
   userAux: User | undefined;
+
+  edad: string = '';
+  verFiltros = false;
+
+  textSearchVox: string = '';
 
   constructor(private readonly userService: UserService,
     private readonly router: Router) { }
@@ -27,29 +32,44 @@ export class UsuariosComponent implements OnInit {
 
   cargarPagina(pag: number) {
     this.pagina = pag;
+
     this.listaUsuariosMostrar(this.tamPag, this.tamPag * this.pagina);
   }
 
   listaUsuariosMostrar(limit: number, skip: number) {
-    this.userService.getUsersInterval(limit, skip).subscribe({
-      next: (response) => {
-        this.usuarios = response.users;
-        this.numeroUsuarios = response.total;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-      complete: () => {
-        this.cargado = true;
-      }
-    })
+    const NumEdad = Number(this.edad);
+    if (this.edad != '' && !isNaN(NumEdad)) {
+      this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
+        next: (response) => {
+          this.usuarios = response.users;
+          this.numeroUsuarios = response.total;
+          console.log(this.usuarios);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    } else {
+      this.userService.searchUsertInterval(this.textSearchVox, limit, skip).subscribe({
+        next: (response) => {
+          this.usuarios = response.users;
+          this.numeroUsuarios = response.total;
+        },
+        error: (error) => {
+          console.log(error);
+        },
+        complete: () => {
+          this.cargado = true;
+        }
+      })
+    }
   }
 
   eliminarUsuario(id: number) {
     this.userService.deleteUser(id).subscribe({
       next: (response) => {
         this.userAux = response;
-        alert('El usuario'+ this.userAux.username +' ha sido eliminado correctamente');
+        alert('El usuario' + this.userAux.username + ' ha sido eliminado correctamente');
       },
       error: (error) => {
         console.log(error);
@@ -58,7 +78,10 @@ export class UsuariosComponent implements OnInit {
   }
 
   search(search: string) {
-    this.userService.searchUser(search).subscribe({
+    this.pagina = 0;
+    this.edad = '';
+    this.textSearchVox = search;
+    this.userService.searchUsertInterval(search, this.tamPag, this.tamPag * this.pagina).subscribe({
       next: (response) => {
         this.usuarios = response.users;
         this.numeroUsuarios = response.total;
@@ -70,8 +93,37 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  goToDetalleUsuario(){
+  filtrar() {
+    this.pagina = 0;
+    const NumEdad = Number(this.edad);
+    console.log("edad " + this.edad);
+    if (!isNaN(NumEdad)) {
+      this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
+        next: (response) => {
+          this.usuarios = response.users;
+          this.numeroUsuarios = response.total;
+          console.log(this.usuarios);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    }
+  }
+
+  goToDetalleUsuario() {
     this.router.navigate(['usuarios/usuario/detalle']);
   }
 
+  Multiplos4(total: number) {
+    return Array.from({ length: total }, (_, i) => (i + 1) * 4); //para cada posición calcula su múltiplo de 4
+  }
+
+  activarFiltros() {
+    if (this.verFiltros == false) {
+      this.verFiltros = true;
+    } else {
+      this.verFiltros = false;
+    }
+  }
 }
