@@ -21,6 +21,10 @@ export class ProductService {
     return this.http.get<ProductResponse>(`${this.apiUrl}/products`);
   }
 
+  getOneProduct(idProducto: number): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/products/${idProducto}`);
+  }
+
   getProductsInterval(limit: number, skip: number): Observable<ProductResponse> {
     return this.http.get<ProductResponse>(`${this.apiUrl}/products?limit=${limit}&skip=${skip}`);
   }

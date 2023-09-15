@@ -6,6 +6,7 @@ import { NuevoProductoComponent } from 'src/app/modules/nuevo-producto/nuevo-pro
 import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.component';
+import { CarritosComponent } from './modules/carritos/carritos.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'usuarios', component:UsuariosComponent},
   {path: 'usuarios/usuario/detalle', component:NuevoUsuarioComponent},
   {path: 'usuarios/usuario/detalle/edit/:id', component:NuevoUsuarioComponent},
+  {path: 'carritos/usuario/:id', component:CarritosComponent},
 ];
 
  

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserResponse } from '../model/user-response.model';
 import { User } from '../model/user.model';
+import { CartResponse } from '../model/carro-response.model';
 
 @Injectable({
   providedIn: 'root'
@@ -49,4 +50,17 @@ export class UserService {
   filtrarPorEdad(edad: number, limit: number, skip: number): Observable<UserResponse> {
     return this.http.get<UserResponse>(`${this.apiUrl}/users/filter?key=age&value=${edad}&limit=${limit}&skip=${skip}`);
   }
+
+  filtrarPorFechaNacimiento(fecha: string, limit: number, skip: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/users/filter?key=birthDate&value=${fecha}&limit=${limit}&skip=${skip}`);
+  }
+
+  filtrarPorGenero(genero: string, limit: number, skip: number): Observable<UserResponse> {
+    return this.http.get<UserResponse>(`${this.apiUrl}/users/filter?key=gender&value=${genero}&limit=${limit}&skip=${skip}`);
+  }
+
+  getCarritoUsuario(idUsuario: number): Observable<CartResponse> {
+    return this.http.get<CartResponse>(`${this.apiUrl}/users/${idUsuario}/carts`);
+  }
+  
 }

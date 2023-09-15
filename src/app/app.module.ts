@@ -13,6 +13,7 @@ import { NavegacionComponent } from './modules/navegacion/navegacion.component';
 import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.component';
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.component';
+import { CarritosComponent } from './modules/carritos/carritos.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.com
     NavegacionComponent,
     PaginaInicioComponent,
     UsuariosComponent,
-    NuevoUsuarioComponent
+    NuevoUsuarioComponent,
+    CarritosComponent
   ],
   imports: [
     BrowserModule,

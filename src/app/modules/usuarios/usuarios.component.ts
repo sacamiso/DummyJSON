@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { constants } from 'src/app/core/constants';
+import { Cart } from 'src/app/core/model/carro.model';
 import { User } from 'src/app/core/model/user.model';
 import { UserService } from 'src/app/core/services/user.service';
 
@@ -19,9 +20,15 @@ export class UsuariosComponent implements OnInit {
   userAux: User | undefined;
 
   edad: string = '';
+  fechaNacimiento: string = '';
+  genero: string = '';
   verFiltros = false;
 
   textSearchVox: string = '';
+
+  carrosAux: Array<Cart> = [];
+  numeroCarros: number = 0;
+  carroCargado = false;
 
   constructor(private readonly userService: UserService,
     private readonly router: Router) { }
@@ -30,16 +37,51 @@ export class UsuariosComponent implements OnInit {
     this.cargarPagina(0);
   }
 
+  verCarro(idUsuario: number) {
+    this.carroCargado = false;
+    this.userService.getCarritoUsuario(idUsuario).subscribe({
+      next: (response) => {
+        this.carrosAux = response.carts;
+        this.numeroCarros = response.total;
+        this.carroCargado = true;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
+
   cargarPagina(pag: number) {
     this.pagina = pag;
-
     this.listaUsuariosMostrar(this.tamPag, this.tamPag * this.pagina);
   }
 
   listaUsuariosMostrar(limit: number, skip: number) {
     const NumEdad = Number(this.edad);
-    if (this.edad != '' && !isNaN(NumEdad)) {
+    if (this.edad != '' && !isNaN(NumEdad) && this.edad!=null) {
       this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
+        next: (response) => {
+          this.usuarios = response.users;
+          this.numeroUsuarios = response.total;
+          console.log(this.usuarios);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    } else if (this.fechaNacimiento != '' && this.fechaNacimiento!=null) {
+      this.userService.filtrarPorFechaNacimiento(this.fechaNacimiento, this.tamPag, this.tamPag * this.pagina).subscribe({
+        next: (response) => {
+          this.usuarios = response.users;
+          this.numeroUsuarios = response.total;
+          console.log(this.usuarios);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      })
+    } else if (this.genero != '' && this.genero!=null) {
+      this.userService.filtrarPorGenero(this.genero, this.tamPag, this.tamPag * this.pagina).subscribe({
         next: (response) => {
           this.usuarios = response.users;
           this.numeroUsuarios = response.total;
@@ -79,7 +121,10 @@ export class UsuariosComponent implements OnInit {
 
   search(search: string) {
     this.pagina = 0;
+    this.verFiltros = false;
+    this.genero='';
     this.edad = '';
+    this.fechaNacimiento='';
     this.textSearchVox = search;
     this.userService.searchUsertInterval(search, this.tamPag, this.tamPag * this.pagina).subscribe({
       next: (response) => {
@@ -93,23 +138,6 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
-  filtrar() {
-    this.pagina = 0;
-    const NumEdad = Number(this.edad);
-    console.log("edad " + this.edad);
-    if (!isNaN(NumEdad)) {
-      this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
-        next: (response) => {
-          this.usuarios = response.users;
-          this.numeroUsuarios = response.total;
-          console.log(this.usuarios);
-        },
-        error: (error) => {
-          console.log(error);
-        }
-      })
-    }
-  }
 
   goToDetalleUsuario() {
     this.router.navigate(['usuarios/usuario/detalle']);
