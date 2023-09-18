@@ -29,19 +29,19 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div class="d-flex flex-row align-items-center">
                                                         <div>
-                                                            <a class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetalles' + producto.id" (click)="getProductById(producto.id)" style="width: 65px;">
-                                                                <img src="assets/icons/detalles.png" class="img-fluid rounded-3" alt="Shopping item" style="width: 65px;">
+                                                            <a class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetallesP' + producto.id" (click)="getProductById(producto.id)" style="width: 65px;">
+                                                                <img src="assets/icons/detalles.png" class="img-fluid rounded-3" alt="detalles producto" style="width: 65px;">
                                                             </a>
 
 
                                                             <div *ngIf="productoAux" class="modal fade"
-                                                                [id]="'modalDetalles' + producto.id" tabindex="-1"
-                                                                aria-labelledby="modalDetallesLabel" aria-hidden="true">
+                                                                [id]="'modalDetallesP' + producto.id" tabindex="-1"
+                                                                aria-labelledby="modalDetallesPLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
                                                                             <h5 class="modal-title"
-                                                                                id="modalDetallesLabel">Detalles del
+                                                                                id="modalDetallesPLabel">Detalles del
                                                                                 artículo {{
                                                                                 productoAux.title }}</h5>
                                                                             <button type="button" class="btn-close"

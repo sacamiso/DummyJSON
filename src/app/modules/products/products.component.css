@@ -1,0 +1,23 @@
+.zoom {
+    transition: transform .2s; 
+}
+ 
+.zoom:hover {
+    transform: scale(1.05); 
+}
+
+.zoom2 {
+    transition: transform .2s; 
+}
+ 
+.zoom2:hover {
+    transform: scale(1.3); 
+} 
+
+.sombra {
+    transition: transform .3s; 
+}
+ 
+.sombra:hover{
+    box-shadow: 0 0 20px #6243D3;
+}

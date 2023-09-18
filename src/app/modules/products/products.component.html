@@ -40,11 +40,13 @@
         <app-paginador [numeroElementos]="numeroProductos" [tamPag]="tamPag"
             (pagina)="cargarPagina($event)"></app-paginador>
 
+        <div id="liveAlert"></div>
+
         <ul class="list-unstyled row">
             <li *ngFor="let producto of productos" class="col-md-3 mb-4">
-                <div class="card h-100">
+                <div class="sombra card h-100">
                     <div class="img-container" style=" justify-content: center;">
-                        <img src="{{ producto.thumbnail }}" alt="foto" class="card-img-top" />
+                        <img src="{{ producto.thumbnail }}" alt="foto" class="zoom card-img-top" />
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.title }}</h5>
@@ -58,7 +60,7 @@
 
                         <!--detalles de un producto-->
                         <!-- Botón genrear modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="zoom btn btn-primary" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalDetalles' + producto.id">
                             Ver
                         </button>
@@ -111,7 +113,7 @@
                             <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
                         </button> -->
 
-                        <a class="btn float-end" data-bs-toggle="modal"
+                        <a class="zoom2 btn float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalCerrar' + producto.id">
                             <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar articulo">
                         </a>

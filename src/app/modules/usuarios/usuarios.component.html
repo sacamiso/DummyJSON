@@ -17,13 +17,15 @@
                     </div>
                     <div class="btn col-2 mx-2 mb-2">
                         <a class="my-2" (click)="activarFiltros()">
-                            <img src="assets/icons/filtro.png" width="32" height="32" alt="Filtros">
+                            <img class="zoom" src="assets/icons/filtro.png" width="32" height="32" alt="Filtros">
                         </a>
                     </div>
                 </div>
             </div>
 
         </div>
+
+
 
         <a (click)="goToDetalleUsuario()" class="btn btn-success mb-4">
             Añadir un nuevo usuario
@@ -101,11 +103,13 @@
         <app-paginador [numeroElementos]="numeroUsuarios" [tamPag]="tamPag"
             (pagina)="cargarPagina($event)"></app-paginador>
 
+        <div id="liveAlert"></div>
+
         <ul class="list-unstyled row">
             <li *ngFor="let usuario of usuarios" class="col-md-3 mb-4">
-                <div class="card h-100">
+                <div class="sombra card h-100">
                     <div class="img-container" style=" justify-content: center;">
-                        <img src="{{ usuario.image }}" alt="fotoDePerfil" class="card-img-top" />
+                        <img src="{{ usuario.image }}" alt="fotoDePerfil" class="zoom card-img-top" />
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ usuario.firstName }} {{ usuario.lastName }}</h5>
@@ -118,7 +122,7 @@
                     <div class="container my-4">
                         <!--detalles de un usuario-->
                         <!-- Botón generar el modal -->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                        <button type="button" class="zoom btn btn-primary" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalDetalles' + usuario.id">
                             Ver
                         </button>
@@ -169,7 +173,7 @@
                         <!--Hasta aquí detalles de un usuario con su modal-->
 
 
-                        <a class="btn float-end" data-bs-toggle="modal"
+                        <a class="zoom2 btn float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalCarrito' + usuario.id">
                             <img src="assets/icons/carrito.jpg" width="32" height="32" alt="Ver carrito"
                                 (click)="verCarro(usuario.id)">
@@ -202,7 +206,9 @@
                                                     <div *ngIf="numeroCarros>=1">
                                                         <ul class="list">
                                                             <li *ngFor="let carro of carrosAux" class="col-md-3 mb-4">
-                                                                <p>Carrito {{carro.id}}: dispone de {{carro.totalQuantity}} producto/s y su coste es de {{carro.total}} €</p>
+                                                                <p>Carrito {{carro.id}}: dispone de
+                                                                    {{carro.totalQuantity}} producto/s y su coste es de
+                                                                    {{carro.total}} €</p>
                                                             </li>
                                                         </ul>
                                                         <p>Para ver más detalles pulse en "Ver más"</p>
@@ -222,7 +228,7 @@
                         </div>
 
                         <!-- Botón genrear modal -->
-                        <a class="btn float-end" data-bs-toggle="modal"
+                        <a class="zoom2 btn float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalEliminar' + usuario.id">
                             <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar usuario">
                         </a>
@@ -239,7 +245,7 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        ¿Está seguro que desea eliminar el usuario{{ usuario.username }} con id {{
+                                        ¿Está seguro que desea eliminar el usuario {{ usuario.username }} con id {{
                                         usuario.id }}?
                                     </div>
                                     <div class="modal-footer">

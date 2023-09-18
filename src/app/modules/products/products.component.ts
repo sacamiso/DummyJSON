@@ -22,9 +22,12 @@ export class ProductComponent implements OnInit {
   pAux: Product | undefined;
 
   textSearchBox: string = '';
+  alertPlaceholder: HTMLElement | null;
 
   constructor(private readonly productService: ProductService,
-    private readonly router: Router) { }
+    private readonly router: Router) {
+      this.alertPlaceholder = document.getElementById('liveAlert');
+     }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -50,13 +53,27 @@ export class ProductComponent implements OnInit {
     })
   }
 
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
   eliminarProducto(id: number) {
     this.productService.deleteProduct(id).subscribe({
       next: (response) => {
         this.pAux = response;
-        alert('El producto' + this.pAux.title + ' ha sido eliminado correctamente');
+        this.alerta('El producto ' + this.pAux.title + ' ha sido eliminado correctamente', 'success');
+        
       },
       error: (error) => {
+        this.alerta('El producto no se ha podido eliminar', 'danger');
         console.log(error);
       }
     })

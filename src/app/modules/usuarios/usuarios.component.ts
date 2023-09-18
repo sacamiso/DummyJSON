@@ -30,8 +30,12 @@ export class UsuariosComponent implements OnInit {
   numeroCarros: number = 0;
   carroCargado = false;
 
+  alertPlaceholder: HTMLElement | null;
+
   constructor(private readonly userService: UserService,
-    private readonly router: Router) { }
+    private readonly router: Router) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+  }
 
   ngOnInit(): void {
     this.cargarPagina(0);
@@ -58,7 +62,7 @@ export class UsuariosComponent implements OnInit {
 
   listaUsuariosMostrar(limit: number, skip: number) {
     const NumEdad = Number(this.edad);
-    if (this.edad != '' && !isNaN(NumEdad) && this.edad!=null) {
+    if (this.edad != '' && !isNaN(NumEdad) && this.edad != null) {
       this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
         next: (response) => {
           this.usuarios = response.users;
@@ -69,7 +73,7 @@ export class UsuariosComponent implements OnInit {
           console.log(error);
         }
       })
-    } else if (this.fechaNacimiento != '' && this.fechaNacimiento!=null) {
+    } else if (this.fechaNacimiento != '' && this.fechaNacimiento != null) {
       this.userService.filtrarPorFechaNacimiento(this.fechaNacimiento, this.tamPag, this.tamPag * this.pagina).subscribe({
         next: (response) => {
           this.usuarios = response.users;
@@ -80,7 +84,7 @@ export class UsuariosComponent implements OnInit {
           console.log(error);
         }
       })
-    } else if (this.genero != '' && this.genero!=null) {
+    } else if (this.genero != '' && this.genero != null) {
       this.userService.filtrarPorGenero(this.genero, this.tamPag, this.tamPag * this.pagina).subscribe({
         next: (response) => {
           this.usuarios = response.users;
@@ -111,20 +115,36 @@ export class UsuariosComponent implements OnInit {
     this.userService.deleteUser(id).subscribe({
       next: (response) => {
         this.userAux = response;
-        alert('El usuario' + this.userAux.username + ' ha sido eliminado correctamente');
+        this.alerta('El usuario ' + this.userAux.username + ' ha sido eliminado correctamente', 'success');
+        //alert('El usuario' + this.userAux.username + ' ha sido eliminado correctamente');
       },
       error: (error) => {
+        this.alerta('El usuario no se ha podido eliminar', 'danger');
         console.log(error);
       }
     })
   }
 
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    console.log('entro en alerta');
+    console.log(this.alertPlaceholder);
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
   search(search: string) {
     this.pagina = 0;
     this.verFiltros = false;
-    this.genero='';
+    this.genero = '';
     this.edad = '';
-    this.fechaNacimiento='';
+    this.fechaNacimiento = '';
     this.textSearchVox = search;
     this.userService.searchUsertInterval(search, this.tamPag, this.tamPag * this.pagina).subscribe({
       next: (response) => {

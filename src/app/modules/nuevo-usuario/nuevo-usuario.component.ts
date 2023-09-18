@@ -18,6 +18,7 @@ export class NuevoUsuarioComponent implements OnInit {
   cargado = false;
   id: number;
   usuarioForm: FormGroup;
+  alertPlaceholder: HTMLElement | null;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,7 @@ export class NuevoUsuarioComponent implements OnInit {
     private location: Location,
     private formBuilder: FormBuilder
   ) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
     this.id = Number(this.route.snapshot.paramMap.get('id'));
     this.usuarioForm = this.formBuilder.group({
       firstName: [null, Validators.required],
@@ -213,6 +215,20 @@ export class NuevoUsuarioComponent implements OnInit {
     this.location.back();
   }
 
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    console.log('entro en alerta');
+    console.log(this.alertPlaceholder);
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
   guardarNuevoUsuario() {
     if (!this.usuario) {
       return;
@@ -221,9 +237,11 @@ export class NuevoUsuarioComponent implements OnInit {
     this.userService.addUser(this.usuario).subscribe({
       next: (response) => {
         this.usuario = response;
-        alert('El usuario' + this.usuario.username + ' ha sido creado correctamente');
+        this.alerta('El usuario' + this.usuario.username + ' ha sido creado correctamente', 'success');
+        
       },
       error: (error) => {
+        this.alerta('El usuario no se ha podido guardar', 'danger');
         console.log(error);
       }
     })
@@ -237,9 +255,10 @@ export class NuevoUsuarioComponent implements OnInit {
     this.userService.updateUser(this.id, this.usuario).subscribe({
       next: (response) => {
         this.usuario = response;
-        alert('El usuario' + this.usuario.username + ' ha sido actualizado correctamente');
+        this.alerta('El usuario' + this.usuario.username + ' ha sido actualizado correctamente', 'success');
       },
       error: (error) => {
+        this.alerta('El usuario no se ha podido actualizar', 'danger');
         console.log(error);
       }
     })

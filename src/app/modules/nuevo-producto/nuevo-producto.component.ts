@@ -21,6 +21,7 @@ export class NuevoProductoComponent implements OnInit {
   id: number;
   productoForm: FormGroup; //Si lo declaro solo así tengo que inicializarlo en el constructor
   categorias:Array<string> = [];
+  alertPlaceholder: HTMLElement | null;
   
   constructor(
     private route: ActivatedRoute,
@@ -39,6 +40,7 @@ export class NuevoProductoComponent implements OnInit {
       brand: [null, Validators.required],
       category: [null, Validators.required]
     });
+    this.alertPlaceholder = document.getElementById('liveAlert');
   }
 
   ngOnInit()  {
@@ -117,6 +119,18 @@ export class NuevoProductoComponent implements OnInit {
     this.producto = await firstValueFrom(this.productService.getProductById(this.id));
   }
 
+  alerta(message: string, type: string) {
+    this.alertPlaceholder = document.getElementById('liveAlert');
+    if (!this.alertPlaceholder) {
+      return;
+    }
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = `<div class="alert alert-${type} alert-dismissible" role="alert"> ${message} <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>`;
+
+    this.alertPlaceholder.appendChild(wrapper);
+  }
+
   updateProduct() {
     if (!this.producto) {
       return;
@@ -125,9 +139,11 @@ export class NuevoProductoComponent implements OnInit {
     this.productService.updateProduct(this.id, this.producto).subscribe({
       next: (response) => {
         this.producto = response;
-        alert('Actualizado correctamente el artículo ' + this.producto.title);
+        this.alerta('Actualizado correctamente el artículo ' + this.producto.title, 'success');
+        
       },
       error: (error) => {
+        this.alerta('El artículo no se ha podido actualizar', 'danger');
         console.log(error);
       }
     })
@@ -141,9 +157,11 @@ export class NuevoProductoComponent implements OnInit {
     this.productService.addProduct(this.producto).subscribe({
       next: (response) => {
         this.producto = response;
-        alert('Guardado correctamente el artículo ' + this.producto.title);
+        this.alerta('Guardado correctamente el artículo ' + this.producto.title, 'success');
+        
       },
       error: (error) => {
+        this.alerta('El artículo no se ha podido guardar', 'danger');
         console.log(error);
       }
     })
