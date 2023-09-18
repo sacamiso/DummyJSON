@@ -24,12 +24,6 @@ export class NavegacionComponent implements OnInit {
       case 3:
         this.seleccionado = 3;
         break;
-      case 4:
-        this.seleccionado = 4;
-        break;
-      case 5:
-        this.seleccionado = 5;
-        break;
       default:
         this.seleccionado = 0;
         break;

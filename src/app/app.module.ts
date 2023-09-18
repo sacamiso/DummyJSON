@@ -14,6 +14,7 @@ import { PaginaInicioComponent } from './modules/pagina-inicio/pagina-inicio.com
 import { UsuariosComponent } from './modules/usuarios/usuarios.component';
 import { NuevoUsuarioComponent } from './modules/nuevo-usuario/nuevo-usuario.component';
 import { CarritosComponent } from './modules/carritos/carritos.component';
+import { FooterComponent } from './modules/footer/footer.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { CarritosComponent } from './modules/carritos/carritos.component';
     PaginaInicioComponent,
     UsuariosComponent,
     NuevoUsuarioComponent,
-    CarritosComponent
+    CarritosComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

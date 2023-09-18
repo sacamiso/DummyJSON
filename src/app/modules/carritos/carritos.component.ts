@@ -6,6 +6,7 @@ import { ProductService } from 'src/app/core/services/product.service';
 import { Cart } from 'src/app/core/model/carro.model';
 import { Product } from 'src/app/core/model/product.model';
 import { CarritoService } from 'src/app/core/services/carrito.service';
+import { User } from 'src/app/core/model/user.model';
 
 @Component({
   selector: 'app-carritos',
@@ -19,6 +20,7 @@ export class CarritosComponent implements OnInit {
   productoAux: Product | undefined;
   numeroCarros: number = 0;
   cargado = false;
+  usuario: User | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,6 +30,7 @@ export class CarritosComponent implements OnInit {
     private readonly cartService: CarritoService
   ) {
     this.idUsuario = Number(this.route.snapshot.paramMap.get('id'));
+    this.getUsuario(this.idUsuario);
   }
 
   ngOnInit(): void {
@@ -35,6 +38,16 @@ export class CarritosComponent implements OnInit {
     this.cargado = true;
   }
 
+  getUsuario(idUsuario: number) {
+    this.userService.getUserById(idUsuario).subscribe({
+      next: (response) => {
+        this.usuario = response;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+  }
 
   getCarros(idUsuario: number) {
     this.userService.getCarritoUsuario(idUsuario).subscribe({

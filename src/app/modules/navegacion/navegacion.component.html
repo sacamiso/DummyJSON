@@ -8,10 +8,7 @@
                 <a routerLink="/productos" class="nav-link"> Productos </a>
             </li>
             <li [ngClass]="seleccionado == 3 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(3)" >
-                <a routerLink="/usuarios" class="nav-link text-danger"> Usuarios </a>
-            </li>
-            <li [ngClass]="seleccionado == 4 ? 'nav-item active' : 'nav-item'" (click)="cambiaSeleccionado(4)">
-                <a routerLink="sobre-el-proyecto"  class="nav-link"> Sobre el proyecto </a>
+                <a routerLink="/usuarios" class="nav-link"> Usuarios </a>
             </li>            
         </ul>
     </div>

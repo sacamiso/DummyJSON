@@ -1,0 +1,12 @@
+footer {
+    bottom: 0;
+    width: 100%;
+}
+
+.zoom  {
+    transition: transform .2s;
+}
+
+.zoom:hover {
+    transform: scale(1.3);
+}
