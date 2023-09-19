@@ -1,12 +1,13 @@
 <div *ngIf="cargado" class="container mt-4">
     <div id="liveAlert"></div>
     <form [formGroup]="productoForm" (ngSubmit)="guardar()">
+        <p class="text-danger">* Campos obligatorios</p>
 
         <div class="card">
             <div class="card-body">
                 <div class="form-item mb-3">
-                    <label for="title">NOMBRE:</label>
-                    <input id="title" class="form-control" type="text" formControlName="title"
+                    <label for="title">NOMBRE *:</label>
+                    <input required id="title" class="form-control" type="text" formControlName="title"
                         placeholder="Título de producto" />
                 </div>
                 <div class="form-item mb-3">
@@ -16,33 +17,33 @@
                 </div>
                 <div class="d-flex flex-row justify-content-between mb-3">
                     <div class="form-item">
-                        <label for="price">PRECIO (€):</label>
-                        <input id="price" class="form-control" type="number" formControlName="price"
+                        <label for="price">PRECIO (€) *:</label>
+                        <input required id="price" class="form-control" type="number" formControlName="price"
                             placeholder="Precio" />
                     </div>
                     <div class="form-item">
-                        <label for="discountPercentage">DESCUENTO (%):</label>
-                        <input id="discountPercentage" class="form-control" type="number"
+                        <label for="discountPercentage">DESCUENTO (%) *:</label>
+                        <input required id="discountPercentage" class="form-control" type="number"
                             formControlName="discountPercentage" placeholder="Descuento" />
                     </div>
                     <div class="form-item">
-                        <label for="rating">VALORACIÓN:</label>
-                        <input id="rating" class="form-control" type="number" formControlName="rating"
+                        <label for="rating">VALORACIÓN *:</label>
+                        <input required id="rating" class="form-control" type="number" formControlName="rating"
                             placeholder="Valoración" />
                     </div>
                     <div class="form-item">
-                        <label for="stock">STOCK:</label>
-                        <input id="stock" class="form-control" type="number" formControlName="stock"
+                        <label for="stock">STOCK *:</label>
+                        <input required id="stock" class="form-control" type="number" formControlName="stock"
                             placeholder="Stock" />
                     </div>
                 </div>
                 <div class="form-item mb-3">
-                    <label for="brand">MARCA:</label>
-                    <input id="brand" class="form-control" type="text" formControlName="brand" placeholder="Marca" />
+                    <label for="brand">MARCA *:</label>
+                    <input required id="brand" class="form-control" type="text" formControlName="brand" placeholder="Marca" />
                 </div>
                 <div class="form-item mb-3">
-                    <label for="category">CATEGORÍA:</label>
-                    <select id="category" class="form-control" formControlName="category">
+                    <label for="category">CATEGORÍA *:</label>
+                    <select required id="category" class="form-control" formControlName="category">
                         <option [value]="null">Selecciona una categoría</option>
                         <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
                     </select>
