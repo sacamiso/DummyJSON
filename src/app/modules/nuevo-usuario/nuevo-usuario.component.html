@@ -1,14 +1,15 @@
 <div *ngIf="cargado" class="container mt-4">
     <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
         <div class="form-group">
+            <p class="text-danger">* Campos obligatorios</p>
             <div class="form-item mb-3">
-                <label for="firstName">NOMBRE DE PILA:</label>
-                <input id="firstName" class="form-control" type="text" formControlName="firstName"
+                <label for="firstName">NOMBRE DE PILA*:</label>
+                <input required id="firstName" class="form-control" type="text" formControlName="firstName"
                     placeholder="Nombre de pila" />
             </div>
             <div class="form-item mb-3">
-                <label for="lastName">APELLIDO:</label>
-                <input id="lastName" class="form-control" type="text" formControlName="lastName"
+                <label for="lastName">APELLIDO*:</label>
+                <input required id="lastName" class="form-control" type="text" formControlName="lastName"
                     placeholder="Apellido" />
             </div>
             <div class="form-item mb-3">
@@ -17,11 +18,11 @@
                     placeholder="Apellido" />
             </div>
             <div class="form-item mb-3">
-                <label for="age">EDAD:</label>
-                <input id="age" class="form-control" type="number" formControlName="age" placeholder="Edad" />
+                <label for="age">EDAD*:</label>
+                <input required id="age" class="form-control" type="number" formControlName="age" placeholder="Edad" />
             </div>
             <div class="form-item mb-3">
-                <label>GÉNERO:</label>
+                <label>GÉNERO*:</label>
                 <div class="form-check">
                     <input class="form-check-input" type="radio" name="gender" id="male" value="male">
                     <label class="form-check-label" for="male">Masculino</label>
@@ -32,26 +33,26 @@
                 </div>
             </div>
             <div class="form-item mb-3">
-                <label for="email">EMAIL:</label>
-                <input id="email" class="form-control" type="text" formControlName="email" placeholder="Email" />
+                <label for="email">EMAIL*:</label>
+                <input required id="email" class="form-control" type="text" formControlName="email" placeholder="Email" />
             </div>
             <div class="form-item mb-3">
-                <label for="phone">TELÉFONO:</label>
-                <input id="phone" class="form-control" type="text" formControlName="phone" placeholder="Email" />
+                <label for="phone">TELÉFONO*:</label>
+                <input required id="phone" class="form-control" type="text" formControlName="phone" placeholder="Email" />
             </div>
             <div class="form-item mb-3">
-                <label for="username">NOMBRE DE USUARIO:</label>
-                <input id="username" class="form-control" type="text" formControlName="username"
+                <label for="username">NOMBRE DE USUARIO*:</label>
+                <input required id="username" class="form-control" type="text" formControlName="username"
                     placeholder="Nombre de usuario" />
             </div>
             <div class="form-item mb-3">
-                <label for="password">CONTRASEÑA:</label>
-                <input id="password" class="form-control" type="password" formControlName="password"
+                <label for="password">CONTRASEÑA*:</label>
+                <input required id="password" class="form-control" type="password" formControlName="password"
                     placeholder="Contraseña" />
             </div>
             <div class="form-item mb-3">
-                <label for="birthDate">FECHA DE NACIMINETO:</label>
-                <input id="birthDate" class="form-control" type="date" formControlName="birthDate"
+                <label for="birthDate">FECHA DE NACIMINETO*:</label>
+                <input required id="birthDate" class="form-control" type="date" formControlName="birthDate"
                     placeholder="Fecha de nacimiento" />
             </div>
             <div class="form-item mb-3">
@@ -128,13 +129,13 @@
             <div formGroupName="address">
                 <h2>DIRECCIÓN</h2>
                 <div class="form-item mb-3">
-                    <label for="address">DIRECCIÓN:</label>
-                    <input id="address" class="form-control" type="text" formControlName="address"
+                    <label for="address">DIRECCIÓN*:</label>
+                    <input required id="address" class="form-control" type="text" formControlName="address"
                         placeholder="Dirección" />
                 </div>
                 <div class="form-item mb-3">
-                    <label for="city">CIUDAD:</label>
-                    <input id="city" class="form-control" type="text" formControlName="city"
+                    <label for="city">CIUDAD*:</label>
+                    <input required id="city" class="form-control" type="text" formControlName="city"
                         placeholder="Ciudad" />
                 </div>
                 <div formGroupName="coordinates">
@@ -151,13 +152,13 @@
                     </div>
                 </div>
                 <div class="form-item mb-3">
-                    <label for="postalCode">CÓDIGO POSTAL:</label>
-                    <input id="postalCode" class="form-control" type="text" formControlName="postalCode"
+                    <label for="postalCode">CÓDIGO POSTAL*:</label>
+                    <input required id="postalCode" class="form-control" type="text" formControlName="postalCode"
                         placeholder="Código postal" />
                 </div>
                 <div class="form-item mb-3">
-                    <label for="state">ESTADO:</label>
-                    <input id="state" class="form-control" type="text" formControlName="state"
+                    <label for="state">ESTADO*:</label>
+                    <input required id="state" class="form-control" type="text" formControlName="state"
                         placeholder="Estado" />
                 </div>
             </div>
