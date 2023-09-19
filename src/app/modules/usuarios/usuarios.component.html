@@ -62,14 +62,14 @@
                             <input class="form-check-input" type="radio" name="genero" id="male" [(ngModel)]="genero"
                                 value="male">
                             <label class="form-check-label" for="male">
-                                Male
+                                <span style="margin-left: 10px;">Male</span>
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <input class="form-check-input" type="radio" name="genero" id="female" value="female"
                                 [(ngModel)]="genero">
                             <label class="form-check-label" for="female">
-                                Female
+                                <span style="margin-left: 10px;">Female</span>
                             </label>
                         </div>
                     </div>
@@ -173,59 +173,9 @@
                         <!--Hasta aquí detalles de un usuario con su modal-->
 
 
-                        <a class="zoom2 btn float-end" data-bs-toggle="modal"
-                            [attr.data-bs-target]="'#modalCarrito' + usuario.id">
-                            <img src="assets/icons/carrito.jpg" width="32" height="32" alt="Ver carrito"
-                                (click)="verCarro(usuario.id)">
+                        <a *ngIf="mapCarro.get(usuario.id)" class="zoom2 btn float-end" routerLink="/carritos/usuario/{{usuario.id}}">
+                            <img src="assets/icons/carrito.jpg" width="32" height="32" alt="Ver carrito">
                         </a>
-
-                        <!-- Modal -->
-                        <div class="modal fade" [id]="'modalCarrito' + usuario.id" tabindex="-1"
-                            aria-labelledby="modalCarritoLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div *ngIf="carroCargado" class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="modalCarritoLabel">Carrito de {{
-                                            usuario.username }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container mt-4">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h5 *ngIf="numeroCarros<1" class="card-title">Actualmente no tiene
-                                                        ningún carrito disponible</h5>
-                                                    <div *ngIf="numeroCarros==1">
-                                                        <p class="card-title">Dispone de un carrito</p>
-                                                    </div>
-                                                    <div *ngIf="numeroCarros>1">
-                                                        <p class="card-title">Dispone de un total de {{numeroCarros}}
-                                                            carrito</p>
-                                                    </div>
-                                                    <div *ngIf="numeroCarros>=1">
-                                                        <ul class="list">
-                                                            <li *ngFor="let carro of carrosAux" class="col-md-3 mb-4">
-                                                                <p>Carrito {{carro.id}}: dispone de
-                                                                    {{carro.totalQuantity}} producto/s y su coste es de
-                                                                    {{carro.total}} €</p>
-                                                            </li>
-                                                        </ul>
-                                                        <p>Para ver más detalles pulse en "Ver más"</p>
-                                                    </div>
-                                                </div>
-                                                <div *ngIf="numeroCarros>=1" class="card-footer">
-                                                    <a routerLink="/carritos/usuario/{{usuario.id}}"
-                                                        class="btn btn-success" data-bs-dismiss="modal">
-                                                        Ver más
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
                         <!-- Botón genrear modal -->
                         <a class="zoom2 btn float-end" data-bs-toggle="modal"

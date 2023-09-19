@@ -23,6 +23,8 @@ export class UsuariosComponent implements OnInit {
   fechaNacimiento: string = '';
   genero: string = '';
   verFiltros = false;
+  
+  mapCarro = new Map<number, boolean>();
 
   textSearchVox: string = '';
 
@@ -41,13 +43,15 @@ export class UsuariosComponent implements OnInit {
     this.cargarPagina(0);
   }
 
-  verCarro(idUsuario: number) {
-    this.carroCargado = false;
+  tieneCarro(idUsuario: number){
     this.userService.getCarritoUsuario(idUsuario).subscribe({
       next: (response) => {
-        this.carrosAux = response.carts;
-        this.numeroCarros = response.total;
-        this.carroCargado = true;
+        if(response.total > 0){
+          this.mapCarro.set(idUsuario, true);
+        }else{
+          this.mapCarro.set(idUsuario, false);
+        }
+      
       },
       error: (error) => {
         console.log(error);
@@ -55,12 +59,14 @@ export class UsuariosComponent implements OnInit {
     })
   }
 
+
   cargarPagina(pag: number) {
     this.pagina = pag;
     this.listaUsuariosMostrar(this.tamPag, this.tamPag * this.pagina);
   }
 
   listaUsuariosMostrar(limit: number, skip: number) {
+    this.mapCarro.clear();
     const NumEdad = Number(this.edad);
     if (this.edad != '' && !isNaN(NumEdad) && this.edad != null) {
       this.userService.filtrarPorEdad(NumEdad, this.tamPag, this.tamPag * this.pagina).subscribe({
@@ -71,6 +77,14 @@ export class UsuariosComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
+        },
+        complete: () => {
+          for(let usu of this.usuarios){
+            this.tieneCarro(usu.id);
+          }
+          
+          this.cargado = true;
+          
         }
       })
     } else if (this.fechaNacimiento != '' && this.fechaNacimiento != null) {
@@ -82,6 +96,14 @@ export class UsuariosComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
+        },
+        complete: () => {
+          for(let usu of this.usuarios){
+            this.tieneCarro(usu.id);
+          }
+          
+          this.cargado = true;
+          
         }
       })
     } else if (this.genero != '' && this.genero != null) {
@@ -93,6 +115,14 @@ export class UsuariosComponent implements OnInit {
         },
         error: (error) => {
           console.log(error);
+        },
+        complete: () => {
+          for(let usu of this.usuarios){
+            this.tieneCarro(usu.id);
+          }
+          
+          this.cargado = true;
+          
         }
       })
     } else {
@@ -105,7 +135,12 @@ export class UsuariosComponent implements OnInit {
           console.log(error);
         },
         complete: () => {
+          for(let usu of this.usuarios){
+            this.tieneCarro(usu.id);
+          }
+          
           this.cargado = true;
+          
         }
       })
     }
