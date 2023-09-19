@@ -117,7 +117,7 @@
                         <p class="card-text">{{ usuario.age }} años</p>
                         <p class="card-text">{{ usuario.username }}</p>
                         <p class="card-text">{{ usuario.gender }}</p>
-                        <h6 class="card-subtitle mb-2 text-primary">{{ usuario.email }}</h6>
+                        <a href="mailto:{{ usuario.email }}">{{ usuario.email }}</a>
                     </div>
                     <div class="container my-4">
                         <!--detalles de un usuario-->

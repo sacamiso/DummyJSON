@@ -33,51 +33,27 @@
                                                                 <img src="assets/icons/detalles.png" class="img-fluid rounded-3" alt="detalles producto" style="width: 65px;">
                                                             </a>
 
-
-                                                            <div *ngIf="productoAux" class="modal fade"
-                                                                [id]="'modalDetallesP' + producto.id" tabindex="-1"
+                                                            <div *ngIf="productoAux" class="modal fade" [id]="'modalDetallesP' + producto.id" tabindex="-1"
                                                                 aria-labelledby="modalDetallesPLabel" aria-hidden="true">
                                                                 <div class="modal-dialog">
                                                                     <div class="modal-content">
                                                                         <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="modalDetallesPLabel">Detalles del
-                                                                                artículo {{
-                                                                                productoAux.title }}</h5>
-                                                                            <button type="button" class="btn-close"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"
-                                                                                (click)="reseteaProducto()"></button>
+                                                                            <h5 class="modal-title" id="modalDetallesPLabel">Detalles del artículo {{productoAux.title }}</h5>
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="reseteaProducto()"></button>
                                                                         </div>
                                                                         <div class="modal-body">
                                                                             <div class="container mt-4">
                                                                                 <div class="card">
-                                                                                    <img src="{{ productoAux.thumbnail }}"
-                                                                                        class="card-img-top"
-                                                                                        alt="Producto">
+                                                                                    <img src="{{ productoAux.thumbnail }}"  class="card-img-top" alt="Producto">
                                                                                     <div class="card-body">
-                                                                                        <h5 class="card-title">{{
-                                                                                            productoAux.title }}</h5>
-                                                                                        <p class="card-text">{{
-                                                                                            productoAux.description }}
-                                                                                        </p>
-                                                                                        <p class="card-text">Precio: {{
-                                                                                            productoAux.price }} €</p>
-                                                                                        <p class="card-text">Descuento:
-                                                                                            {{
-                                                                                            productoAux.discountPercentage
-                                                                                            }}%
-                                                                                        </p>
-                                                                                        <p class="card-text">Valoración:
-                                                                                            {{ productoAux.rating }}</p>
-                                                                                        <p class="card-text">Stock: {{
-                                                                                            productoAux.stock }}
-                                                                                            unidades</p>
-                                                                                        <p class="card-text">Marca: {{
-                                                                                            productoAux.brand }}</p>
-                                                                                        <p class="card-text">Categoría:
-                                                                                            {{ productoAux.category }}
-                                                                                        </p>
+                                                                                        <h5 class="card-title">{{ productoAux.title }}</h5>
+                                                                                        <p class="card-text">{{ productoAux.description }} </p>
+                                                                                        <p class="card-text">Precio: {{ productoAux.price }} €</p>
+                                                                                        <p class="card-text">Descuento: {{ productoAux.discountPercentage }}% </p>
+                                                                                        <p class="card-text">Valoración: {{ productoAux.rating }}</p>
+                                                                                        <p class="card-text">Stock: {{ productoAux.stock }} unidades</p>
+                                                                                        <p class="card-text">Marca: {{ productoAux.brand }}</p>
+                                                                                        <p class="card-text">Categoría: {{ productoAux.category }} </p>
                                                                                     </div>
                                                                                 </div>
 
@@ -91,10 +67,8 @@
                                                         </div>
                                                         <div class="ms-3">
                                                             <h5>{{producto.title}}</h5>
-                                                            <p class="small mb-0">Precio sin descuento:
-                                                                {{producto.total}}€</p>
-                                                            <p class="small mb-0">Descuento:
-                                                                {{producto.discountPercentage}}%</p>
+                                                            <p class="small mb-0">Precio sin descuento: {{producto.total}}€</p>
+                                                            <p class="small mb-0">Descuento: {{producto.discountPercentage}}%</p>
                                                         </div>
                                                     </div>
                                                     <div class="d-flex flex-row align-items-center">
@@ -116,8 +90,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                                     <h5 class="mb-0">Detalles de usuario</h5>
-                                                    <img src="{{ usuario.image }}"
-                                                        class="img-fluid rounded-3" style="width: 100px;" alt="Avatar">
+                                                    <img src="{{ usuario.image }}" class="img-fluid rounded-3" style="width: 100px;" alt="Avatar">
                                                 </div>
 
                                                 <div class="mt-4">
@@ -156,7 +129,7 @@
 
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-2">Descuento</p>
-                                                    <p class="mb-2">%</p>
+                                                    <p class="mb-2">{{descuento.get(carro.id)}}%</p>
                                                 </div>
 
                                                 <div class="d-flex justify-content-between mb-4">

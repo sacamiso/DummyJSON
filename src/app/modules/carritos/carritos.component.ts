@@ -7,6 +7,7 @@ import { Cart } from 'src/app/core/model/carro.model';
 import { Product } from 'src/app/core/model/product.model';
 import { CarritoService } from 'src/app/core/services/carrito.service';
 import { User } from 'src/app/core/model/user.model';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-carritos',
@@ -21,6 +22,7 @@ export class CarritosComponent implements OnInit {
   numeroCarros: number = 0;
   cargado = false;
   usuario: User | undefined;
+  descuento = new Map<number, number>();
 
   constructor(
     private route: ActivatedRoute,
@@ -34,8 +36,29 @@ export class CarritosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCarros(this.idUsuario);
+    this.cargaDatos();
+  }
+
+  async cargaDatos(){
+    await  this.getCarros(this.idUsuario);
+    console.log(this.carros);
+    for(let c of this.carros){
+      this.calculaDescuento(c.id);
+    }
+    console.log(this.descuento);
     this.cargado = true;
+  }
+
+  calculaDescuento(idC: number){
+    this.cartService.getCartById(idC).subscribe({
+      next: (response) => {
+        this.descuento.set(idC,(100-(response.discountedTotal*100/response.total)));
+        console.log(this.descuento);
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
   }
 
   getUsuario(idUsuario: number) {
@@ -49,16 +72,22 @@ export class CarritosComponent implements OnInit {
     })
   }
 
-  getCarros(idUsuario: number) {
+  /*getCarros(idUsuario: number) {
     this.userService.getCarritoUsuario(idUsuario).subscribe({
       next: (response) => {
         this.carros = response.carts;
-        this.numeroCarros = response.total;
+        //this.numeroCarros = response.total;
       },
       error: (error) => {
         console.log(error);
       }
     })
+  }*/
+
+  async getCarros(idUsuario: number) {
+    const aux= await firstValueFrom(this.userService.getCarritoUsuario(idUsuario));
+    this.carros = aux.carts;
+    this.numeroCarros = aux.total;
   }
 
   reseteaProducto(){
