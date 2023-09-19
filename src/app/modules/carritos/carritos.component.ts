@@ -52,8 +52,9 @@ export class CarritosComponent implements OnInit {
   calculaDescuento(idC: number){
     this.cartService.getCartById(idC).subscribe({
       next: (response) => {
-        this.descuento.set(idC,(100-(response.discountedTotal*100/response.total)));
-        console.log(this.descuento);
+        const d = Number((100-(response.discountedTotal*100/response.total)).toFixed(2));
+        this.descuento.set(idC,d);
+        
       },
       error: (error) => {
         console.log(error);
