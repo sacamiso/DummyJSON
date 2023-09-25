@@ -11,7 +11,7 @@
                                     <div class="col-lg-7">
                                         <h5 class="mb-3">
                                             <a (click)="goBack()">
-                                                <img src="assets/icons/volver.png"
+                                                <img src="assets/icons/volver.png" title="volver"
                                                         class="img-fluid rounded-3" style="width: 30px;" alt="Volver">
                                                 Volver
                                             </a>
@@ -30,7 +30,7 @@
                                                     <div class="d-flex flex-row align-items-center">
                                                         <div>
                                                             <a class="btn" data-bs-toggle="modal" [attr.data-bs-target]="'#modalDetallesP' + producto.id" (click)="getProductById(producto.id)" style="width: 65px;">
-                                                                <img src="assets/icons/lupa.png" class="img-fluid rounded-3" alt="detalles producto" style="width: 65px;">
+                                                                <img src="assets/icons/lupa.png" title="ver más detalles del producto" class="img-fluid rounded-3" alt="detalles producto" style="width: 65px;">
                                                             </a>
 
                                                             <div *ngIf="productoAux" class="modal fade" [id]="'modalDetallesP' + producto.id" tabindex="-1"
@@ -90,7 +90,7 @@
                                             <div class="card-body">
                                                 <div class="d-flex justify-content-between align-items-center mb-4">
                                                     <h5 class="mb-0">Detalles de usuario</h5>
-                                                    <img src="{{ usuario.image }}" class="img-fluid rounded-3" style="width: 100px;" alt="Avatar">
+                                                    <img src="{{ usuario.image }}" class="img-fluid rounded-3" style="width: 100px;" alt="Avatar" title="foto de usuario">
                                                 </div>
 
                                                 <div class="mt-4">
@@ -129,12 +129,12 @@
 
                                                 <div class="d-flex justify-content-between">
                                                     <p class="mb-2">Descuento</p>
-                                                    <p class="mb-2">{{descuento.get(carro.id)}}%</p>
+                                                    <p class="mb-2 ">-{{descuento.get(carro.id)}}%</p>
                                                 </div>
-
+                                                <hr>
                                                 <div class="d-flex justify-content-between mb-4">
-                                                    <p class="mb-2">Total</p>
-                                                    <p class="mb-2"> {{carro.discountedTotal}}€</p>
+                                                    <p class="mb-2"><strong>Total</strong></p>
+                                                    <p class="mb-2"><strong> {{carro.discountedTotal}}€</strong></p>
                                                 </div>
 
 

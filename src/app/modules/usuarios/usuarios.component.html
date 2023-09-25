@@ -17,7 +17,7 @@
                     </div>
                     <div class="btn col-2 mx-2 mb-2">
                         <a class="my-2" (click)="activarFiltros()">
-                            <img class="zoom" src="assets/icons/filtro.png" width="32" height="32" alt="Filtros">
+                            <img class="zoom" src="assets/icons/filtro.png" title="filtros" width="32" height="32" alt="Filtros">
                         </a>
                     </div>
                 </div>
@@ -174,13 +174,13 @@
 
 
                         <a *ngIf="mapCarro.get(usuario.id)" class="zoom2 btn float-end" routerLink="/carritos/usuario/{{usuario.id}}">
-                            <img src="assets/icons/carrito.jpg" width="32" height="32" alt="Ver carrito">
+                            <img src="assets/icons/carrito.jpg" width="32" height="32" title="Ver carrito" alt="Ver carrito">
                         </a>
 
                         <!-- Botón genrear modal -->
                         <a class="zoom2 btn float-end" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#modalEliminar' + usuario.id">
-                            <img src="assets/icons/icono-papelera.png" width="32" height="32" alt="Eliminar usuario">
+                            <img src="assets/icons/icono-papelera.png" width="32" height="32" title="Eliminar usuario" alt="Eliminar usuario">
                         </a>
 
                         <!-- Modal -->
