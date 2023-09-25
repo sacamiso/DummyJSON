@@ -1,200 +1,262 @@
 <div *ngIf="cargado" class="container mt-4">
-    <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
-        <div class="form-group">
-            <p class="text-danger">* Campos obligatorios</p>
-            <div class="form-item mb-3">
-                <label for="firstName">NOMBRE DE PILA<span class="text-danger">*</span></label>
-                <input required id="firstName" class="form-control" type="text" formControlName="firstName"
-                    placeholder="Nombre de pila" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="lastName">APELLIDO<span class="text-danger">*</span></label>
-                <input required id="lastName" class="form-control" type="text" formControlName="lastName"
-                    placeholder="Apellido" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="maidenName">APELLIDO DE SOLTER@</label>
-                <input id="maidenName" class="form-control" type="text" formControlName="maidenName"
-                    placeholder="Apellido" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="age">EDAD<span class="text-danger">*</span></label>
-                <input required id="age" class="form-control" type="number" formControlName="age" placeholder="Edad" />
-            </div>
-            <div class="form-item mb-3">
-                <label>GÉNERO<span class="text-danger">*</span></label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="male" value="male" formControlName="gender">
-                    <label class="form-check-label" for="male">Masculino</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="gender" id="female" value="female" formControlName="gender">
-                    <label class="form-check-label" for="female">Femenino</label>
-                </div>
-            </div>
-            <div class="form-item mb-3">
-                <label for="email">EMAIL<span class="text-danger">*</span></label>
-                <input required id="email" class="form-control" type="text" formControlName="email" placeholder="Email" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="phone">TELÉFONO<span class="text-danger">*</span></label>
-                <input required id="phone" class="form-control" type="text" formControlName="phone" placeholder="Email" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="username">NOMBRE DE USUARIO<span class="text-danger">*</span></label>
-                <input required id="username" class="form-control" type="text" formControlName="username"
-                    placeholder="Nombre de usuario" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="password">CONTRASEÑA<span class="text-danger">*</span></label>
-                <input required id="password" class="form-control" type="password" formControlName="password"
-                    placeholder="Contraseña" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="birthDate">FECHA DE NACIMINETO<span class="text-danger">*</span></label>
-                <input required id="birthDate" class="form-control" type="date" formControlName="birthDate"
-                    placeholder="Fecha de nacimiento" />
-            </div>
-            <div class="form-item mb-3">
-                <label>GRUPO SANGUÍNEO</label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="A-" value="A-" formControlName="bloodGroup">
-                    <label class="form-check-label" for="A-">A-</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="A+" value="A+" formControlName="bloodGroup">
-                    <label class="form-check-label" for="A+">A+</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="B-" value="B-" formControlName="bloodGroup">
-                    <label class="form-check-label" for="B-">B-</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="B+" value="B+" formControlName="bloodGroup">
-                    <label class="form-check-label" for="B+">B+</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="AB-" value="AB-" formControlName="bloodGroup">
-                    <label class="form-check-label" for="AB-">AB-</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="AB+" value="AB+" formControlName="bloodGroup">
-                    <label class="form-check-label" for="AB+">AB+</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="0-" value="0-" formControlName="bloodGroup">
-                    <label class="form-check-label" for="0-">0-</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="bloodGroup" id="0+" value="0+" formControlName="bloodGroup">
-                    <label class="form-check-label" for="0+">0+</label>
-                </div>
-            </div>
-            <div class="form-item mb-3">
-                <label for="height">ESTATURA (cm)</label>
-                <input id="height" class="form-control" type="number" formControlName="height" placeholder="Estatura" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="weight">PESO (kg)</label>
-                <input id="weight" class="form-control" type="number" formControlName="weight" placeholder="Peso" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="eyeColor">COLOR DE OJOS</label>
-                <input id="eyeColor" class="form-control" type="text" formControlName="eyeColor"
-                    placeholder="Color de ojos" />
-            </div>
-            <div formGroupName="hair">
-                <h2>PELO</h2>
-                <div class="form-item mb-3">
-                    <label for="color">COLOR</label>
-                    <input id="color" class="form-control" type="text" formControlName="color"
-                        placeholder="Color" />
-                </div>
-                <div class="form-item mb-3">
-                    <label for="type">TIPO</label>
-                    <input id="type" class="form-control" type="text" formControlName="type"
-                        placeholder="Tipo" />
-                </div>
-            </div>
-            <div class="form-item mb-3">
-                <label for="domain">DOMINIO</label>
-                <input id="domain" class="form-control" type="text" formControlName="domain"
-                    placeholder="Dominio" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="ip">IP</label>
-                <input id="ip" class="form-control" type="text" formControlName="ip"
-                    placeholder="IP" />
-            </div>
-            <div formGroupName="address">
-                <h2>DIRECCIÓN</h2>
-                <div class="form-item mb-3">
-                    <label for="address">DIRECCIÓN<span class="text-danger">*</span></label>
-                    <input required id="address" class="form-control" type="text" formControlName="address"
-                        placeholder="Dirección" />
-                </div>
-                <div class="form-item mb-3">
-                    <label for="city">CIUDAD<span class="text-danger">*</span></label>
-                    <input required id="city" class="form-control" type="text" formControlName="city"
-                        placeholder="Ciudad" />
-                </div>
-                <div formGroupName="coordinates">
-                    <h3>COORDENADAS</h3>
-                    <div class="form-item mb-3">
-                        <label for="lat">LATITUD</label>
-                        <input id="lat" class="form-control" type="number" formControlName="lat"
-                            placeholder="Latitud" />
+    <p class="text-danger">* Campos obligatorios</p>
+
+    <div class="container">
+        <form [formGroup]="usuarioForm" (ngSubmit)="guardar()">
+            <section class="rounded" style="background-color: #d2e9f8;">
+                <div class="form-group m-4">
+                    <br>
+                    <div class="row">
+                        <div class="form-item col-md-3 mb-3">
+                            <label for="firstName">NOMBRE DE PILA<span class="text-danger">*</span></label>
+                            <input required id="firstName" class="form-control" type="text" formControlName="firstName"
+                                placeholder="Nombre de pila" />
+                        </div>
+                        <div class="form-item col-md-3 mb-3">
+                            <label for="lastName">APELLIDO<span class="text-danger">*</span></label>
+                            <input required id="lastName" class="form-control" type="text" formControlName="lastName"
+                                placeholder="Apellido" />
+                        </div>
+                        <div class="form-item col-md-3 mb-3">
+                            <label for="maidenName">APELLIDO DE SOLTER@</label>
+                            <input id="maidenName" class="form-control" type="text" formControlName="maidenName"
+                                placeholder="Apellido" />
+                        </div>
+                        <div class="form-item col-md-3 mb-3">
+                            <label for="age">EDAD<span class="text-danger">*</span></label>
+                            <input required id="age" class="form-control" type="number" formControlName="age"
+                                placeholder="Edad" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 d-flex align-items-center">
+                            <div class="form-item mb-3">
+                                <label>GÉNERO<span class="text-danger" style="margin-right: 10px;">*</span></label>
+                                <div class="form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="male" value="male"
+                                        formControlName="gender">
+                                    <label class="form-check-label" for="male"><span
+                                            style="margin-left: 10px;">Masculino</span></label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="female"
+                                        value="female" formControlName="gender">
+                                    <label class="form-check-label" for="female"><span
+                                            style="margin-left: 10px;">Femenino</span></label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-item mb-3">
+                                <label for="email">EMAIL<span class="text-danger">*</span></label>
+                                <input required id="email" class="form-control" type="text" formControlName="email"
+                                    placeholder="Email" />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-item mb-3">
+                                <label for="phone">TELÉFONO<span class="text-danger">*</span></label>
+                                <input required id="phone" class="form-control" type="text" formControlName="phone"
+                                    placeholder="Email" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 form-item mb-3">
+                            <label for="username">NOMBRE DE USUARIO<span class="text-danger">*</span></label>
+                            <input required id="username" class="form-control" type="text" formControlName="username"
+                                placeholder="Nombre de usuario" />
+                        </div>
+                        <div class="col-md-3 form-item mb-3">
+                            <label for="password">CONTRASEÑA<span class="text-danger">*</span></label>
+                            <input required id="password" class="form-control" type="password"
+                                formControlName="password" placeholder="Contraseña" />
+                        </div>
+                        <div class="col-md-3 form-item mb-3">
+                            <label for="birthDate">FECHA DE NACIMINETO<span class="text-danger">*</span></label>
+                            <input required id="birthDate" class="form-control" type="date" formControlName="birthDate"
+                                placeholder="Fecha de nacimiento" />
+                        </div>
+                        <div class="col-md-3 form-item mb-3">
+                            <label for="university">UNIVERSIDAD</label>
+                            <input id="university" class="form-control" type="text" formControlName="university"
+                                placeholder="Universidad" />
+                        </div>
                     </div>
                     <div class="form-item mb-3">
-                        <label for="lng">LONGITUD</label>
-                        <input id="lng" class="form-control" type="number" formControlName="lng"
-                            placeholder="Longitud" />
+                        <label><span style="margin-right: 10px;">GRUPO SANGUÍNEO:</span></label>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="A-" value="A-"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="A-"><span
+                                    style="margin-left: 10px; margin-right: 13px;">A-</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="A+" value="A+"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="A+"><span
+                                    style="margin-left: 10px; margin-right: 13px;">A+</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="B-" value="B-"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="B-"><span
+                                    style="margin-left: 10px; margin-right: 13px;">B-</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="B+" value="B+"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="B+"><span
+                                    style="margin-left: 10px; margin-right: 13px;">B+</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="AB-" value="AB-"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="AB-"><span
+                                    style="margin-left: 10px; margin-right: 13px;">AB-</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="AB+" value="AB+"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="AB+"><span
+                                    style="margin-left: 10px; margin-right: 13px;">AB+</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="0-" value="0-"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="0-"><span
+                                    style="margin-left: 10px; margin-right: 13px;">0-</span></label>
+                        </div>
+                        <div class="form-check-inline">
+                            <input class="form-check-input" type="radio" name="bloodGroup" id="0+" value="0+"
+                                formControlName="bloodGroup">
+                            <label class="form-check-label" for="0+"><span
+                                    style="margin-left: 10px; margin-right: 13px;">0+</span></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-item mb-3">
+                            <label for="height">ESTATURA (cm)</label>
+                            <input id="height" class="form-control" type="number" formControlName="height"
+                                placeholder="Estatura" />
+                        </div>
+                        <div class="col-md-4 form-item mb-3">
+                            <label for="weight">PESO (kg)</label>
+                            <input id="weight" class="form-control" type="number" formControlName="weight"
+                                placeholder="Peso" />
+                        </div>
+                        <div class="col-md-4 form-item mb-3">
+                            <label for="eyeColor">COLOR DE OJOS</label>
+                            <input id="eyeColor" class="form-control" type="text" formControlName="eyeColor"
+                                placeholder="Color de ojos" />
+                        </div>
+                    </div>
+                    <div formGroupName="hair">
+                        <div class="row">
+                            <h5 class="col-md-4 my-3">CARACTERÍSTICAS DEL PELO:</h5>
+                            <div class="col-md-4 form-item mb-3">
+                                <label for="color">COLOR</label>
+                                <input id="color" class="form-control" type="text" formControlName="color"
+                                    placeholder="Color" />
+                            </div>
+                            <div class="col-md-4 form-item mb-3">
+                                <label for="type">TIPO</label>
+                                <input id="type" class="form-control" type="text" formControlName="type"
+                                    placeholder="Tipo" />
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-4 form-item mb-3">
+                            <label for="domain">DOMINIO</label>
+                            <input id="domain" class="form-control" type="text" formControlName="domain"
+                                placeholder="Dominio" />
+                        </div>
+                        <div class="col-md-4 form-item mb-3">
+                            <label for="ip">IP</label>
+                            <input id="ip" class="form-control" type="text" formControlName="ip" placeholder="IP" />
+                        </div>
+                        <div class="form-item mb-3 col-md-4">
+                            <label for="macAddress">MAC</label>
+                            <input id="macAddress" class="form-control" type="text" formControlName="macAddress"
+                                placeholder="MAC" />
+                        </div>
+                    </div>
+                    <hr>
+                    <div formGroupName="address">
+                        <h2>DIRECCIÓN</h2>
+                        <div class="row">
+                            <div class="form-item mb-3 col-md-6">
+                                <label for="address">DIRECCIÓN<span class="text-danger">*</span></label>
+                                <input required id="address" class="form-control" type="text" formControlName="address"
+                                    placeholder="Dirección" />
+                            </div>
+                            <div class="form-item mb-3 col-md-3">
+                                <label for="city">CIUDAD<span class="text-danger">*</span></label>
+                                <input required id="city" class="form-control" type="text" formControlName="city"
+                                    placeholder="Ciudad" />
+                            </div>
+                            <div class="form-item mb-3 col-md-3">
+                                <label for="postalCode">CÓDIGO POSTAL<span class="text-danger">*</span></label>
+                                <input required id="postalCode" class="form-control" type="text"
+                                    formControlName="postalCode" placeholder="Código postal" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8" formGroupName="coordinates">
+                                <div class="row">
+                                    <div class="col-md-6 form-item mb-3">
+                                        <label for="lat">LATITUD</label>
+                                        <input id="lat" class="form-control" type="number" formControlName="lat"
+                                            placeholder="Latitud" />
+                                    </div>
+                                    <div class="col-md-6 form-item mb-3">
+                                        <label for="lng">LONGITUD</label>
+                                        <input id="lng" class="form-control" type="number" formControlName="lng"
+                                            placeholder="Longitud" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 form-item mb-3">
+                                <label for="state">ESTADO<span class="text-danger">*</span></label>
+                                <input required id="state" class="form-control" type="text" formControlName="state"
+                                    placeholder="Estado" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <hr>
+                    <div formGroupName="bank">
+                        <h2>DATOS BANCARIOS</h2>
+                        <div class="row">
+                            <div class="col-md-3 form-item mb-3">
+                                <label for="cardExpire">EXPITRACIÓN DE LA TARJETA</label>
+                                <input id="cardExpire" class="form-control" type="date" formControlName="cardExpire"
+                                    placeholder="Fecha de expiiración" />
+                            </div>
+                            <div class="col-md-5 form-item mb-3">
+                                <label for="cardNumber">NÚMERO DE TARJETA</label>
+                                <input id="cardNumber" class="form-control" type="text" formControlName="cardNumber"
+                                    placeholder="Número de tarjeta" />
+                            </div>
+                            <div class="col-md-4 form-item mb-3">
+                                <label for="cardType">TIPO DE TARJETA</label>
+                                <input id="cardType" class="form-control" type="text" formControlName="cardType"
+                                    placeholder="Tipo de tarjeta" />
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-                <div class="form-item mb-3">
-                    <label for="postalCode">CÓDIGO POSTAL<span class="text-danger">*</span></label>
-                    <input required id="postalCode" class="form-control" type="text" formControlName="postalCode"
-                        placeholder="Código postal" />
-                </div>
-                <div class="form-item mb-3">
-                    <label for="state">ESTADO<span class="text-danger">*</span></label>
-                    <input required id="state" class="form-control" type="text" formControlName="state"
-                        placeholder="Estado" />
-                </div>
+            </section>
+            <div id="liveAlert"></div>
+            <div class="card-footer">
+                <button class="btn btn-success" [disabled]="!usuarioForm.valid" type="submit">Guardar</button>
+                <button type="button" class="btn btn-primary float-end" (click)="goBack()">Volver</button>
             </div>
-            <div class="form-item mb-3">
-                <label for="macAddress">MAC</label>
-                <input id="macAddress" class="form-control" type="text" formControlName="macAddress"
-                    placeholder="mac" />
-            </div>
-            <div class="form-item mb-3">
-                <label for="university">UNIVERSIDAD</label>
-                <input id="university" class="form-control" type="text" formControlName="university"
-                    placeholder="Universidad" />
-            </div>
-            <div formGroupName="bank">
-                <h2>DATOS BANCARIOS</h2>
-                <div class="form-item mb-3">
-                    <label for="cardExpire">EXPITRACIÓN DE LA TARJETA</label>
-                    <input id="cardExpire" class="form-control" type="date" formControlName="cardExpire"
-                        placeholder="Fecha de expiiración" />
-                </div>
-                <div class="form-item mb-3">
-                    <label for="cardNumber">NÚMERO DE TARJETA</label>
-                    <input id="cardNumber" class="form-control" type="text" formControlName="cardNumber"
-                        placeholder="Número de tarjeta" />
-                </div>
-                <div class="form-item mb-3">
-                    <label for="cardType">TIPO DE TARJETA</label>
-                    <input id="cardType" class="form-control" type="text" formControlName="cardType"
-                        placeholder="Tipo de tarjeta" />
-                </div>
-            </div>
-        </div>
-        <div id="liveAlert"></div>
-        <div class="card-footer">
-            <button class="btn btn-success" [disabled]="!usuarioForm.valid" type="submit">Guardar</button>
-            <button type="button" class="btn btn-primary float-end" (click)="goBack()">Volver</button>
-        </div>
-    </form>
+            <br>
+        </form>
+
+    </div>
 </div>
