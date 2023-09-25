@@ -47,14 +47,21 @@
                 <div class="sombra card h-100">
                     <div class="p-3" style=" justify-content: center;">
                         <img src="{{ producto.thumbnail }}" alt="foto" class="zoom card-img-top" />
-                        
+
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ producto.title }}</h5>
                         <p class="card-text">{{ producto.description }}</p>
-                        <h6 class="card-subtitle mb-2 text-muted">{{ producto.brand }}</h6>
+                        <div class="d-flex">
+                            <p class="fst-italic">{{ producto.rating}}/5</p>
+                        </div>
+                        <p class="badge bg-danger"><strong>Oferta</strong></p>
+                        <div>
+                            <span style="margin-right: 15px" class="text-danger"> -{{producto.discountPercentage }}%</span>
+                            <strong>{{ producto.price }}€</strong>
+                        </div>
+                        <h6 class="card-subtitle mt-2 mb-2 text-muted">{{ producto.brand }}</h6>
                         <p class="card-text">{{ producto.category }}</p>
-                        <h6 class="card-subtitle text-danger">{{ producto.price }} €</h6>
 
                     </div>
                     <div class="container my-4">
