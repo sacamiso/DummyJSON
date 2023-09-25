@@ -6,7 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProductService } from '../../core/services/product.service';
 import { Product } from 'src/app/core/model/product.model';
 import { firstValueFrom } from 'rxjs';
-
 @Component({
   selector: 'app-nuevo-producto',
   templateUrl: './nuevo-producto.component.html',
@@ -22,6 +21,8 @@ export class NuevoProductoComponent implements OnInit {
   productoForm: FormGroup; //Si lo declaro solo así tengo que inicializarlo en el constructor
   categorias:Array<string> = [];
   alertPlaceholder: HTMLElement | null;
+  tineImagenes = false;
+  currentImageIndex: number = 0;
   
   constructor(
     private route: ActivatedRoute,
@@ -72,6 +73,10 @@ export class NuevoProductoComponent implements OnInit {
       brand: this.producto.brand,
       category: this.producto.category,
     });
+
+    if(this.producto.images.length>0){
+      this.tineImagenes = true;
+    }
   }
 
   iniciaProducto() {
@@ -88,6 +93,21 @@ export class NuevoProductoComponent implements OnInit {
       thumbnail: "",
       images: []
     };
+  }
+
+  nextImage() {
+    if(!this.producto){
+      return;
+    }
+    this.currentImageIndex = (this.currentImageIndex + 1) % this.producto.images.length;
+  }
+
+  prevImage() {
+    if(!this.producto){
+      return;
+    }
+    this.currentImageIndex =
+      (this.currentImageIndex - 1 + this.producto.images.length) % this.producto.images.length;
   }
 
   guardar() {

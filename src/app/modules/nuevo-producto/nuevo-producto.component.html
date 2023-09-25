@@ -1,4 +1,21 @@
 <div *ngIf="cargado" class="container mt-4">
+    
+    <div *ngIf="tineImagenes" id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        <div *ngFor="let foto of producto?.images; let i = index" class="carousel-inner">
+          <div class="carousel-item" [class.active]="i === currentImageIndex">
+            <img class="d-block w-50 mx-auto" [src]="foto" alt="Imagen del producto">
+          </div>
+        </div>
+        <a (click)="prevImage()" class="carousel-control-prev" role="button">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a (click)="nextImage()" class="carousel-control-next" role="button">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+
     <div id="liveAlert"></div>
     <form [formGroup]="productoForm" (ngSubmit)="guardar()">
         <p class="text-danger">* Campos obligatorios</p>
@@ -6,43 +23,44 @@
         <div class="card">
             <div class="card-body">
                 <div class="form-item mb-3">
-                    <label for="title">NOMBRE *:</label>
+                    <label for="title">NOMBRE <span class="text-danger">*</span></label>
                     <input required id="title" class="form-control" type="text" formControlName="title"
                         placeholder="Título de producto" />
                 </div>
                 <div class="form-item mb-3">
-                    <label for="description">DESCRIPCIÓN:</label>
+                    <label for="description">DESCRIPCIÓN</label>
                     <textarea id="description" type="text" formControlName="description" class="form-control"
                         placeholder="Descripción de producto"></textarea>
                 </div>
                 <div class="d-flex flex-row justify-content-between mb-3">
                     <div class="form-item">
-                        <label for="price">PRECIO (€) *:</label>
+                        <label for="price">PRECIO (€) <span class="text-danger">*</span></label>
                         <input required id="price" class="form-control" type="number" formControlName="price"
                             placeholder="Precio" />
                     </div>
                     <div class="form-item">
-                        <label for="discountPercentage">DESCUENTO (%) *:</label>
+                        <label for="discountPercentage">DESCUENTO (%) <span class="text-danger">*</span></label>
                         <input required id="discountPercentage" class="form-control" type="number"
                             formControlName="discountPercentage" placeholder="Descuento" />
                     </div>
                     <div class="form-item">
-                        <label for="rating">VALORACIÓN *:</label>
+                        <label for="rating">VALORACIÓN <span class="text-danger">*</span>:</label>
                         <input required id="rating" class="form-control" type="number" formControlName="rating"
                             placeholder="Valoración" />
                     </div>
                     <div class="form-item">
-                        <label for="stock">STOCK *:</label>
+                        <label for="stock">STOCK <span class="text-danger">*</span> </label>
                         <input required id="stock" class="form-control" type="number" formControlName="stock"
                             placeholder="Stock" />
                     </div>
                 </div>
                 <div class="form-item mb-3">
-                    <label for="brand">MARCA *:</label>
-                    <input required id="brand" class="form-control" type="text" formControlName="brand" placeholder="Marca" />
+                    <label for="brand">MARCA <span class="text-danger">*</span> </label>
+                    <input required id="brand" class="form-control" type="text" formControlName="brand"
+                        placeholder="Marca" />
                 </div>
                 <div class="form-item mb-3">
-                    <label for="category">CATEGORÍA *:</label>
+                    <label for="category">CATEGORÍA <span class="text-danger">*</span> </label>
                     <select required id="category" class="form-control" formControlName="category">
                         <option [value]="null">Selecciona una categoría</option>
                         <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>

@@ -1,0 +1,17 @@
+.carousel-control-next-icon {
+    background-color: black; 
+    color: white; 
+}
+
+.carousel-control-next .sr-only {
+    color: black; 
+}
+
+.carousel-control-prev-icon {
+    background-color: black; 
+    color: white; 
+}
+
+.carousel-control-prev .sr-only {
+    color: black; 
+}

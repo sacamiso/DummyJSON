@@ -20,8 +20,6 @@ export class PaginadorComponent implements OnInit, OnChanges {
   aux: Array<number> = [];
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('he entrado en onChanges');
-    console.log(changes);
       if(changes['tamPag'] && changes['tamPag'].currentValue){
         this.numPagTotales = Math.ceil(this.numeroElementos/this.tamPag);
         this.aux = new Array(this.numPagTotales);
@@ -35,16 +33,12 @@ export class PaginadorComponent implements OnInit, OnChanges {
   }
   
   ngOnInit(): void {
-    console.log("numero de elementos al pasar por onInit");
-    console.log(this.numeroElementos);
     this.numPagTotales = Math.ceil(this.numeroElementos/this.tamPag);
     this.aux = new Array(this.numPagTotales);
   }
 
   cambiarPagina(pag: number) {
     this.pagActual = pag;
-    //console.log('He pasado por aqui'); 
-    //console.log(this.pagActual);    
     this.pagina.emit(this.pagActual);
   }
 
