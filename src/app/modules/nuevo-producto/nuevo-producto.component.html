@@ -35,7 +35,7 @@
                 <div class="d-flex flex-row justify-content-between mb-3">
                     <div class="form-item">
                         <label for="price">PRECIO (€) <span class="text-danger">*</span></label>
-                        <input required id="price" class="form-control" type="number" formControlName="price"
+                        <input required id="price" class="form-control" type="number" min="0" formControlName="price"
                             placeholder="Precio" />
                     </div>
                     <div class="form-item">
@@ -45,12 +45,12 @@
                     </div>
                     <div class="form-item">
                         <label for="rating">VALORACIÓN <span class="text-danger">*</span>:</label>
-                        <input required id="rating" class="form-control" type="number" formControlName="rating"
+                        <input required id="rating" class="form-control" type="number" min="0" max="5" formControlName="rating"
                             placeholder="Valoración" />
                     </div>
                     <div class="form-item">
                         <label for="stock">STOCK <span class="text-danger">*</span> </label>
-                        <input required id="stock" class="form-control" type="number" formControlName="stock"
+                        <input required id="stock" class="form-control" type="number" min="0" formControlName="stock"
                             placeholder="Stock" />
                     </div>
                 </div>
