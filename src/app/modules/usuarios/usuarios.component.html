@@ -109,7 +109,7 @@
             <li *ngFor="let usuario of usuarios" class="col-md-3 mb-4">
                 <div class="sombra card h-100">
                     <div class="img-container p-3" style=" justify-content: center;">
-                        <img src="{{ usuario.image }}" alt="fotoDePerfil" class="zoom card-img-top" />
+                        <img src="{{ usuario.image }}" alt="fotoDePerfil" title="Foto de perfil de {{usuario.firstName}}" class="zoom card-img-top" />
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ usuario.firstName }} {{ usuario.lastName }}</h5>

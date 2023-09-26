@@ -46,7 +46,7 @@
             <li *ngFor="let producto of productos" class="col-md-3 mb-4">
                 <div class="sombra card h-100">
                     <div class="p-3" style=" justify-content: center;">
-                        <img src="{{ producto.thumbnail }}" alt="foto" class="zoom card-img-top" />
+                        <img src="{{ producto.thumbnail }}" alt="foto" class="zoom card-img-top" title="Imagen de {{producto.title}}"/>
 
                     </div>
                     <div class="card-body">
