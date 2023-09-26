@@ -36,7 +36,7 @@ export class NuevoProductoComponent implements OnInit {
       description: null,
       price: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
       discountPercentage: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
-      rating: [null, Validators.compose([Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
+      rating: [null, Validators.compose([Validators.min(0),Validators.max(5), Validators.pattern(/^\d+(\.\d+)?$/), Validators.required])],
       stock:  [null, Validators.compose([Validators.pattern(/^\d+$/), Validators.required])],
       brand: [null, Validators.required],
       category: [null, Validators.required]

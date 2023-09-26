@@ -26,6 +26,9 @@
                     <label for="title">NOMBRE <span class="text-danger">*</span></label>
                     <input required id="title" class="form-control" type="text" formControlName="title"
                         placeholder="Título de producto" />
+                    <span *ngIf="this.productoForm.get('title')?.errors?.['required']">
+                        (Campo obligatorio)
+                    </span>
                 </div>
                 <div class="form-item mb-3">
                     <label for="description">DESCRIPCIÓN</label>
@@ -35,36 +38,77 @@
                 <div class="row mb-3">
                     <div class="col-md-3 form-item">
                         <label for="price">PRECIO (€) <span class="text-danger">*</span></label>
+
                         <input required id="price" class="form-control" type="number" min="0" formControlName="price"
                             placeholder="Precio" />
+                        <span *ngIf="this.productoForm.get('price')?.errors?.['required']">
+                            (Campo obligatorio)
+                        </span>
+                        <span *ngIf="this.productoForm.get('price')?.errors?.['pattern']">
+                            (Debe ser positivo)
+                        </span>
                     </div>
                     <div class="col-md-3 form-item">
                         <label for="discountPercentage">DESCUENTO (%) <span class="text-danger">*</span></label>
                         <input required id="discountPercentage" class="form-control" type="number"
                             formControlName="discountPercentage" placeholder="Descuento" />
+                        <span *ngIf="this.productoForm.get('discountPercentage')?.errors?.['required']">
+                            (Campo obligatorio)
+                        </span>
+                        <span *ngIf="this.productoForm.get('discountPercentage')?.errors?.['pattern']">
+                            (Debe ser positivo)
+                        </span>
                     </div>
                     <div class="col-md-3 form-item">
                         <label for="rating">VALORACIÓN <span class="text-danger">*</span></label>
+
                         <input required id="rating" class="form-control" type="number" min="0" max="5"
                             formControlName="rating" placeholder="Valoración" />
+                        <span *ngIf="this.productoForm.get('rating')?.errors?.['required']">
+                            (Campo obligatorio)
+                        </span>
+                        <span *ngIf="this.productoForm.get('rating')?.errors?.['pattern']">
+                            (Debe ser positivo)
+                        </span>
+                        <span *ngIf="this.productoForm.get('rating')?.errors?.['min']">
+                            (No puede ser menor que 0)
+                        </span>
+                        <span *ngIf="this.productoForm.get('rating')?.errors?.['max']">
+                            (No puede ser mayor que 5)
+                        </span>
                     </div>
                     <div class="col-md-3 form-item">
                         <label for="stock">STOCK <span class="text-danger">*</span> </label>
+
                         <input required id="stock" class="form-control" type="number" min="0" formControlName="stock"
                             placeholder="Stock" />
+                        <span *ngIf="this.productoForm.get('stock')?.errors?.['required']">
+                            (Campo obligatorio)
+                        </span>
+                        <span *ngIf="this.productoForm.get('stock')?.errors?.['pattern']">
+                            (Debe ser un número positivo, sin decimales)
+                        </span>
                     </div>
                 </div>
                 <div class="form-item mb-3">
                     <label for="brand">MARCA <span class="text-danger">*</span> </label>
+
                     <input required id="brand" class="form-control" type="text" formControlName="brand"
                         placeholder="Marca" />
+                    <span *ngIf="this.productoForm.get('brand')?.errors?.['required']">
+                        (Campo obligatorio)
+                    </span>
                 </div>
                 <div class="form-item mb-3">
                     <label for="category">CATEGORÍA <span class="text-danger">*</span> </label>
+                    
                     <select required id="category" class="form-control" formControlName="category">
                         <option [value]="null">Selecciona una categoría</option>
                         <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
                     </select>
+                    <span *ngIf="this.productoForm.get('category')?.errors?.['required']">
+                        (Campo obligatorio)
+                    </span>
                 </div>
 
             </div>
