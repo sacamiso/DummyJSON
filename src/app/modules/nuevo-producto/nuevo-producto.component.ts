@@ -159,7 +159,7 @@ export class NuevoProductoComponent implements OnInit {
     this.productService.updateProduct(this.id, this.producto).subscribe({
       next: (response) => {
         this.producto = response;
-        this.alerta('Actualizado correctamente el artículo ' + this.producto.title, 'success');
+        this.alerta('El artículo ha sido actualizado correctamente ' + this.producto.title, 'success');
         
       },
       error: (error) => {
@@ -177,7 +177,7 @@ export class NuevoProductoComponent implements OnInit {
     this.productService.addProduct(this.producto).subscribe({
       next: (response) => {
         this.producto = response;
-        this.alerta('Guardado correctamente el artículo ' + this.producto.title, 'success');
+        this.alerta('El artículo ha sido guardado correctamente' + this.producto.title, 'success');
         
       },
       error: (error) => {
